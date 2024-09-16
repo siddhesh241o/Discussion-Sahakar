@@ -1,0 +1,86 @@
+.card{
+    border: 2px solid black;
+    width: 150px;
+}
+
+.cards-list{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    padding: 10px;
+
+}
+
+
+.top-banner{
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+#logout-but{
+    width: 150px;
+    height: 50px;
+    border-radius: 10px;
+}
+.main-grid{
+    display: grid;
+    grid-template-columns: 1fr 4fr;
+    border: 1px solid black;
+}
+.Dir_Nav{
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+}
+.Menu-list{
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    list-style: none;
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+}
+#Proj_table{
+    width: 95%;
+}
+td{
+    text-align: center;
+}
+
+.proj-list{
+    height: 300px;
+    overflow-y: scroll;
+}
+.login-main{
+    margin: auto;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    background: url('../public/Images/LoginBack.png') no-repeat ;
+    background-size: contain;
+    width: 80%;
+    height: 70vh;
+
+}
+.login-main form{
+    border-radius: 20px;
+    padding: 50px;
+    border: 2px solid rgb(131, 131, 219);
+    margin: auto;
+    /* margin-top: 100px; */
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    
+}
+.login-main form input{
+    width: 100%;
+    border: 2px solid rgb(101, 101, 146);
+    border-radius: 20px;
+    height: 40px;
+}
+#Submit{
+    background-color: green;
+    width: 150px;
+    height: 40px;
+    border-radius: 30px;
+    margin: auto;
+}
