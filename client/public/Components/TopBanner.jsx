@@ -9,14 +9,16 @@ const TopBanner = () => {
   }
   return <>
     <div className="top-banner">
-      <img src={gov_logo} alt="Logo" width={150} />
+      <img class="gov-logo" src={gov_logo} alt="Logo" width={150} />
       <div className="ban-text" style={{textAlign:'center'}}>
         <h2>SAHAKARA</h2>
         <h3>Connecting Departments, Empowering Progress</h3>
       </div>
       <button onClick={HandleLogOut} id='logout-but'>LogOut</button>
     </div>
-    <hr />
+    <div className="notice-bar">
+        Update: Lorem ipsum dolor sit amet consectetur adipisicing elit. Asperiores delectus distinctio blanditiis exercitationem repudiandae quaerat quas eligendi fugit neque placeat?
+    </div>
   </>
 }
 
