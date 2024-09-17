@@ -39,10 +39,10 @@ const App = () => {
     <Route path="/TaskManager" element={<TaskManager/>} />
     <Route path="/Templates" element={<Templates/>} />
     <Route path="/Seminar" element={<Seminar/>} />
-    <Route path="/Task/:num" element={<Task/>} />
+    <Route path="/Task" element={<Task/>} />
     <Route path="/PendingTasks" element={<PendingTasks/>} />
     <Route path="/TaskStatus" element={<TaskStatus/>} />
-    <Route path="/ProjectDetails/:n" element={<ProjectDetails/>} />
+    <Route path="/ProjectDetails" element={<ProjectDetails/>} />
     <Route path="/MyInventory" element={<MyInventory/>} />
     <Route path="/Inc_req" element={<Inc_req/>} />
     <Route path="/Out_req" element={<Out_req/>} />
