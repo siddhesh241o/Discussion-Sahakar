@@ -16,7 +16,7 @@ const Task = () => {
   return (
     <div className="max-w-2xl mx-auto p-6 bg-white shadow-lg rounded-lg">
       <div className="flex justify-between items-center mb-4">
-        <h1 className="text-2xl font-bold text-gray-900">Task Detail</h1>
+        <h1 className="text-2xl font-bold text-gray-900">Task Details</h1>
         <button className="px-4 py-2 text-sm text-gray-600 border border-gray-300 rounded hover:bg-gray-100">
           SAVE
         </button>
@@ -33,16 +33,9 @@ const Task = () => {
               readOnly
             />
           </div>
+          
           <div className="col-span-2">
             <label className="block text-sm font-medium text-gray-700 mb-1">DESCRIPTION</label>
-            <textarea
-              value="Enter Information"
-              className="w-full h-24 p-2 border border-gray-300 rounded resize-none"
-              readOnly
-            />
-          </div>
-          <div className="col-span-2">
-            <label className="block text-sm font-medium text-gray-700 mb-1">TASK DETAILS</label>
             <textarea
               value="Please grant permission for road inspection at Aram Nagar. Also, attach a GIS of the area to avoid infrastructural conflicts."
               className="w-full h-24 p-2 border border-gray-300 rounded resize-none"
@@ -86,6 +79,13 @@ const Task = () => {
               readOnly
             />
           </div>
+          <div className="col-span-2">
+  <label className="block text-sm font-medium text-gray-700 mb-1">INPUT</label>
+  <textarea
+    className="w-full h-24 p-2 border border-gray-300 rounded resize-none"
+    placeholder="Enter Information"
+  />
+</div>
         </div>
 
         {/* File Upload Section */}
