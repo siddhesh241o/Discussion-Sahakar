@@ -51,7 +51,7 @@ const ProjectList = () => {
             <span className="font-semibold">{project.id} - {project.name}</span>
             <button
               onClick={() => handleCategoryClick(project.id)} // Handle click
-              className="text-sm bg-blue-500 text-white px-2 py-1 rounded"
+              className="text-sm bg-blue-600 text-white px-2 py-1 rounded"
             >
               View Project
             </button>
@@ -74,10 +74,15 @@ const Projects = () => (
       <div className="bg-white rounded-lg shadow p-6">
         <div className="flex justify-between items-center mb-4">
           <h2 className="text-2xl font-bold">Ongoing Projects</h2>
-          <button className="px-3 py-1 bg-blue-500 text-white rounded flex items-center">
+          <div className='flex items-center gap-2'>
+          <button className="px-3 py-1 bg-blue-900 text-white rounded flex items-center">
+            Create Project
+          </button>
+          <button className="px-3 py-1 bg-blue-900 text-white rounded flex items-center">
             <AlertCircle className="mr-1" size={16} />
             Filter
           </button>
+        </div>
         </div>
         <ProjectList />
       </div>
