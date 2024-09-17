@@ -8,15 +8,15 @@ const Dashboard = () => {
         <>
             <div className="cards-list">
                 
-                <div className="card-container" onClick={() => navigate('/GIS')}>
-                    <div className="card" style={{ backgroundImage: 'url(public/Images/geotag.png)', backgroundSize: 'cover', backgroundPosition: 'center' }}>
-                    </div>
-                    <div className="card-label">Geo Tagging</div>
-                </div>
                 <div className="card-container" onClick={() => navigate('/Geotagging')}>
                     <div className="card" style={{ backgroundImage: 'url(public/Images/gis.png)', backgroundSize: 'cover', backgroundPosition: 'center' }}>
                     </div>
                     <div className="card-label">GIS</div>
+                </div>
+                 <div className="card-container" onClick={() => navigate('/GIS')}>
+                    <div className="card" style={{ backgroundImage: 'url(public/Images/geotag.png)', backgroundSize: 'cover', backgroundPosition: 'center' }}>
+                    </div>
+                    <div className="card-label">Geo Tagging</div>
                 </div>
                 <div className="card-container" onClick={() => navigate('/Projects')}>
                     <div className="card" style={{ backgroundImage: 'url(public/Images/project.png)', backgroundSize: 'cover', backgroundPosition: 'center' }}>
