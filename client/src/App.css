@@ -1,5 +1,4 @@
 
-
 .card {
     border: 2px solid #1F7A8C;
     height: 20vh; 
@@ -12,11 +11,13 @@
     text-align: center;
     transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
 }
+
 .card-label{
     display: flex;
     justify-content: center;
     padding-top: 2%;
 }
+
 .Task-Manager-Name
 {
     text-align: center;
@@ -28,7 +29,7 @@
 }
 
 .card button {
-    background-color: #1F7A8C; 
+    background-color: #466b72; 
     color: white;
     border: none;
     padding: 8px 12px;
@@ -48,10 +49,11 @@
 
 .cards-list {
     display: flex;
+    gap: 5vh; 
     flex-wrap: wrap;
     justify-content: space-around;
     padding: 20px;
-    gap: 20px; 
+    
     background-color: #F7F9FB;
 }
 
@@ -74,8 +76,9 @@
 
 .top-banner{
     display: flex;
-    justify-content: space-around;
+    justify-content: space-between;
     align-items: center;
+    height: 12vh;
 }
 #logout-but {
     color: white;
@@ -85,6 +88,7 @@
     background: red;
     margin-right: 2%;
 }
+
 .main-grid{
     display: grid;
     grid-template-columns: 1fr 4fr;
