@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { FiSearch } from 'react-icons/fi'; // Importing the search icon
+import { FiSearch } from 'react-icons/fi'; 
 
 const Inc_req = () => {
   // Sample data 
