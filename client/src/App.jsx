@@ -20,6 +20,7 @@ import MyInventory from '../public/Pages/Inventory_pages/MyInventory.jsx'
 import Inc_req from '../public/Pages/Inventory_pages/Inc_req.jsx'
 import Out_req from '../public/Pages/Inventory_pages/Out_req.jsx'
 import TopBanner from '../public/Components/TopBanner.jsx'
+import Discussion from '../public/Pages/Discussion.jsx'
 import '../src/App.css'
 
 const App = () => {
@@ -46,6 +47,7 @@ const App = () => {
     <Route path="/MyInventory" element={<MyInventory/>} />
     <Route path="/Inc_req" element={<Inc_req/>} />
     <Route path="/Out_req" element={<Out_req/>} />
+    <Route path="/Discussion" element={<Discussion/>} />
 
 
 

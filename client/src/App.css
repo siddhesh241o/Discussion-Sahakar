@@ -154,6 +154,11 @@ td{
     margin: auto;
 }
 .complaint-nav{
+    
     display: flex;
     justify-content: space-around;
+}
+.discuss-main{
+    display: grid;
+    grid-template-columns: 1fr 4fr 7fr;
 }
