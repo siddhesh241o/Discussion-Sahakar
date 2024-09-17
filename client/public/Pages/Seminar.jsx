@@ -1,6 +1,6 @@
 import React from 'react';
-import Calendar from '../Components/Calendar'; // Make sure the path is correct
-import styles from './Seminar.module.css'; //
+import Calendar from '../Components/Calendar'; 
+import styles from './Seminar.module.css'; 
 
 const Seminar = () => {
   return (
