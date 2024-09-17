@@ -10,8 +10,8 @@ const MyProfile = () => {
     governmentId: 'GOV123456',
     adhaarCardNo: '1234 5678 9123',
     panCardNo: 'ABCDE1234F',
-    department: 'Civil Engineering', // Unchangeable
-    designation: 'Senior Engineer', // Unchangeable
+    department: 'Civil Engineering', 
+    designation: 'Senior Engineer', 
     birthDate: '1975-08-15',
     officeAddress: `456, Government Office Complex,
     Near Central Park,
