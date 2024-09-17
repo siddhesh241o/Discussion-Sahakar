@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom'; // Import useNavigate
 import { Search, Filter, Plus } from 'lucide-react';
 import TaskStatus from './TaskStatus'; // Import the TaskStatus component
+import Task from './Task';
 
 // RadioInputs component
 const RadioInputs = ({ selected, onChange }) => {
@@ -46,6 +48,8 @@ const RadioInputs = ({ selected, onChange }) => {
 
 // TaskTable component
 const TaskTable = () => {
+  const navigate = useNavigate(); // Initialize useNavigate
+
   const tasks = [
     { id: 'Task ID', name: 'Task Name', date: 'Date', assignedBy: 'Assigned By', department: 'Department', status: 'Status' },
     { id: 'T-12345', name: 'Complete Report', date: '09/15/24', assignedBy: 'Alice Johnson', department: 'Inter-department', status: 'Pending' },
@@ -80,7 +84,7 @@ const TaskTable = () => {
           </div>
         </div>
         <table className="w-full table-fixed">
-          <tbody>
+        <tbody>
             {tasks.map((task) => (
               <tr key={task.id} className="border-t">
                 <td className="w-1/12 px-4 py-2">{task.id}</td>
@@ -95,24 +99,16 @@ const TaskTable = () => {
                     {task.status}
                   </span>
                 </td>
-
-<td className="w-2/12 px-4 py-2">
-  {task.status === 'Status' ? (
-    ''
-  ) : (
-    <>
-      {task.status === 'Pending' && (
-        <button
-          onClick={() => navigate('/Task')}
-          className="px-4 py-2 bg-blue-600 text-white rounded-md mt-2"
-        >
-          Complete Task
-        </button>
-      )}
-    </>
-  )}
-</td>
-
+                <td className="w-2/12 px-4 py-2">
+                  {task.status === 'Pending' && (
+                    <button
+                      onClick={() => navigate('/Task')}
+                      className="px-4 py-2 bg-blue-600 text-white rounded-md mt-2"
+                    >
+                      Complete Task
+                    </button>
+                  )}
+                </td>
               </tr>
             ))}
           </tbody>
@@ -132,6 +128,7 @@ const TaskTable = () => {
     </div>
   );
 };
+
 // TaskManager component
 const TaskManager = () => {
   const [selected, setSelected] = useState('Pending Tasks');
