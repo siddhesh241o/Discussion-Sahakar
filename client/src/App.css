@@ -153,3 +153,7 @@ td{
     border-radius: 30px;
     margin: auto;
 }
+.complaint-nav{
+    display: flex;
+    justify-content: space-around;
+}
