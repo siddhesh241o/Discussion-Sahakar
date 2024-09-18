@@ -66,28 +66,39 @@ const ProjectList = () => {
   );
 };
 
-const Projects = () => (
-  <div className="flex bg-gray-100 min-h-screen">
-    <Sidebar />
-    <main className="flex-1 p-6">
-      <img src={bannerImage} alt="Project Banner" className="w-full h-56 object-cover mb-4 rounded-lg" />
-      <div className="bg-white rounded-lg shadow p-6">
-        <div className="flex justify-between items-center mb-4">
-          <h2 className="text-2xl font-bold">Ongoing Projects</h2>
-          <div className='flex items-center gap-2'>
-          <button className="px-3 py-1 bg-blue-900 text-white rounded flex items-center">
-            Create Project
-          </button>
-          <button className="px-3 py-1 bg-blue-900 text-white rounded flex items-center">
-            <AlertCircle className="mr-1" size={16} />
-            Filter
-          </button>
+const Projects = () => {
+  const navigate = useNavigate(); // Initialize navigate
+
+  const handleCreateProjectClick = () => {
+    navigate('/CreateProjectForm'); // Navigate to CreateProjectForm page
+  };
+
+  return (
+    <div className="flex bg-gray-100 min-h-screen">
+      <Sidebar />
+      <main className="flex-1 p-6">
+        <img src={bannerImage} alt="Project Banner" className="w-full h-56 object-cover mb-4 rounded-lg" />
+        <div className="bg-white rounded-lg shadow p-6">
+          <div className="flex justify-between items-center mb-4">
+            <h2 className="text-2xl font-bold">Ongoing Projects</h2>
+            <div className='flex items-center gap-2'>
+              <button 
+                className="px-3 py-1 bg-blue-900 text-white rounded flex items-center"
+                onClick={handleCreateProjectClick} // Handle create project click
+              >
+                Create Project
+              </button>
+              <button className="px-3 py-1 bg-blue-900 text-white rounded flex items-center">
+                <AlertCircle className="mr-1" size={16} />
+                Filter
+              </button>
+            </div>
+          </div>
+          <ProjectList />
         </div>
-        </div>
-        <ProjectList />
-      </div>
-    </main>
-  </div>
-);
+      </main>
+    </div>
+  );
+};
 
 export default Projects;

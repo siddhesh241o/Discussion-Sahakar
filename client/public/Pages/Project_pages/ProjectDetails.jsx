@@ -1,5 +1,5 @@
 import React from 'react';
-import { Clipboard, AlertCircle } from 'lucide-react';
+import { Clipboard, AlertCircle, Fullscreen } from 'lucide-react';
 
 const ProjectDetails = () => {
   const projectDetails = {
@@ -15,49 +15,154 @@ const ProjectDetails = () => {
     progressReports: "Monthly updates to city council and stakeholders"
   };
 
+  const styles = {
+    container: {
+      display: 'flex',
+      height: '100%',
+      backgroundColor: '#f3f4f6', // Light gray background
+    },
+    sectionTitle: {
+      fontSize: '1.75rem',
+      fontWeight: 'bold',
+      marginBottom: '16px',
+      color: '#2563eb', // Blue color for section title
+    },
+    detailsSection: {
+      width: '50%',
+      padding: '24px',
+      overflowY: 'auto',
+    },
+    detailsCard: {
+      backgroundColor: 'white',
+      borderRadius: '12px',
+      boxShadow: '0px 4px 20px rgba(0, 0, 0, 0.1)',
+      padding: '24px',
+    },
+    cardTitle: {
+      fontSize: '1.5rem',
+      fontWeight: 'bold',
+      marginBottom: '20px',
+      color: '#1e40af', // Darker blue for card title
+      borderBottom: '2px solid #3b82f6',
+      paddingBottom: '8px',
+    },
+    detailItem: {
+      marginBottom: '16px',
+      padding: '12px',
+      backgroundColor: '#f0f9ff', // Light blue background
+      borderRadius: '8px',
+      transition: 'all 0.3s ease',
+    },
+    detailTitle: {
+      fontWeight: 600,
+      textTransform: 'capitalize',
+      color: '#1e40af', // Darker blue for detail titles
+      marginBottom: '4px',
+    },
+    detailContent: {
+      color: '#4b5563', // Gray color for content
+    },
+    progressSection: {
+      width: '50%',
+      padding: '24px',
+      backgroundColor: '#e5e7eb',
+    },
+    progressTimeline: {
+      display: 'flex',
+      flexDirection: 'column',
+      gap: '16px',
+    },
+    taskCard: {
+      width: '240px',
+      height: '240px',
+      padding: '16px',
+      borderRadius: '8px',
+      display: 'flex',
+      alignItems: 'center',
+      gap: '16px',
+      marginBottom:'2vh',
+      border: '2px solid black',
+    },
+    right: {
+      float: 'right',
+      backgroundColor: '#22c55e', // Green
+    },
+    left: {
+      float: 'left',
+      backgroundColor: '#fb923c', // Orange
+    },
+    taskNumber: {
+      fontSize: '2rem',
+      fontWeight: 'bold',
+    },
+    taskTitle: {
+      fontSize: '1.25rem',
+      fontWeight: 600,
+    },
+    actionButtons: {
+      position: 'fixed',
+      bottom: '24px',
+      right: '24px',
+      display: 'flex',
+      gap: '16px',
+    },
+    actionBtn: {
+      padding: '12px',
+      borderRadius: '50%',
+      boxShadow: '0px 4px 6px rgba(0, 0, 0, 0.1)',
+      transition: 'all 0.3s ease',
+    },
+    yellow: {
+      backgroundColor: '#facc15',
+    },
+    blue: {
+      backgroundColor: '#3b82f6',
+    },
+  };
+
   return (
-    <div className="flex h-screen bg-gray-100">
+    <div style={styles.container}>
       {/* Project Details Section */}
-      <div className="w-1/2 p-6 overflow-y-auto">
-        <h2 className="text-2xl font-bold mb-4">Project Details</h2>
-        <div className="bg-white rounded-lg shadow p-6">
-          <h3 className="text-xl font-semibold mb-2">{projectDetails.name}</h3>
+      <div style={styles.detailsSection}>
+        <h2 style={styles.sectionTitle}>Project Details</h2>
+        <div style={styles.detailsCard}>
+          <h3 style={styles.cardTitle}>{projectDetails.name}</h3>
           {Object.entries(projectDetails).map(([key, value]) => (
-            <div key={key} className="mb-4">
-              <h4 className="font-semibold capitalize">{key.replace(/([A-Z])/g, ' $1').trim()}:</h4>
-              <p>{value}</p>
+            <div key={key} style={styles.detailItem}>
+              <h4 style={styles.detailTitle}>{key.replace(/([A-Z])/g, ' $1').trim()}:</h4>
+              <p style={styles.detailContent}>{value}</p>
             </div>
           ))}
         </div>
       </div>
 
       {/* Progress Tracking Section */}
-      <div className="w-1/2 p-6 bg-gray-200">
-        <h2 className="text-2xl font-bold mb-4">Progress Tracking</h2>
-        <div className="space-y-4">
-          {/* Completed Task */}
-          <div className="bg-green-500 text-white p-4 rounded-lg flex items-center">
-            <div className="text-3xl font-bold mr-4">01</div>
+      <div style={styles.progressSection}>
+        <h2 style={styles.sectionTitle}>Progress Tracking</h2>
+        <div style={styles.progressTimeline}>
+          {/* Completed Task (Right) */}
+          <div style={{ ...styles.taskCard, marginLeft: 'auto', ...styles.right }}>
+            <div style={styles.taskNumber}>01</div>
             <div>
-              <h3 className="font-semibold">Completed</h3>
+              <h3 style={styles.taskTitle}>Completed</h3>
               <p>Submit a formal request with project details</p>
             </div>
           </div>
 
-          {/* In Progress Task */}
-          <div className="bg-orange-500 text-white p-4 rounded-lg flex items-center">
-            <div className="text-3xl font-bold mr-4">02</div>
+          {/* In Progress Task (Left) */}
+          <div style={{ ...styles.taskCard, ...styles.left }}>
+            <div style={styles.taskNumber}>02</div>
             <div>
-              <h3 className="font-semibold">Status: 90%</h3>
+              <h3 style={styles.taskTitle}>Status: 90%</h3>
               <p>Civil Department: Schedule an inspection</p>
             </div>
           </div>
 
-          {/* Locked Task */}
-          <div className="bg-gray-400 text-white p-4 rounded-lg flex items-center">
-            <div className="text-3xl font-bold mr-4">03</div>
+          {/* Locked Task (Right) */}
+          <div style={{ ...styles.taskCard, ...styles.right, marginLeft: 'auto' }}>
+            <div style={styles.taskNumber}>03</div>
             <div>
-              <h3 className="font-semibold">Locked Task</h3>
+              <h3 style={styles.taskTitle}>Locked Task</h3>
               <p>Submit a formal request with project details</p>
             </div>
           </div>
@@ -65,11 +170,11 @@ const ProjectDetails = () => {
       </div>
 
       {/* Floating Action Buttons */}
-      <div className="fixed bottom-6 right-6 flex space-x-4">
-        <button className="bg-yellow-500 p-3 rounded-full shadow-lg">
+      <div style={styles.actionButtons}>
+        <button style={{ ...styles.actionBtn, ...styles.yellow }}>
           <Clipboard size={24} color="white" />
         </button>
-        <button className="bg-blue-500 p-3 rounded-full shadow-lg">
+        <button style={{ ...styles.actionBtn, ...styles.blue }}>
           <AlertCircle size={24} color="white" />
         </button>
       </div>

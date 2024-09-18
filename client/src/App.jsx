@@ -10,6 +10,7 @@ import Geotagging from '../public/Pages/GIS_pages/Geotagging.jsx'
 import Complaints from '../public/Pages/Complaints.jsx'
 import Projects from '../public/Pages/Project_pages/Projects.jsx'
 import TaskManager from '../public/Pages/Task_pages/TaskManager.jsx'
+import CreateProjectForm from '../public/Pages/Project_pages/CreateProjectForm.jsx'
 import Templates from '../public/Pages/Templates.jsx'
 import Task from '../public/Pages/Task_pages/Task.jsx'
 import TaskStatus from '../public/Pages/Task_pages/TaskStatus.jsx'
@@ -37,6 +38,7 @@ const App = () => {
     <Route path="/Geotagging" element={<Geotagging />} />
     <Route path="/Complaints" element={<Complaints/>} />
     <Route path="/Projects" element={<Projects/>} />
+    <Route path="/CreateProjectForm" element={<CreateProjectForm/>} />
     <Route path="/TaskManager" element={<TaskManager/>} />
     <Route path="/Templates" element={<Templates/>} />
     <Route path="/Seminar" element={<Seminar/>} />
