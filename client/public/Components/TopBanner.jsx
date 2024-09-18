@@ -17,7 +17,7 @@ const TopBanner = () => {
       <button onClick={HandleLogOut} id='logout-but'>LogOut</button>
     </div>
     <div className="notice-bar">
-        Update: Lorem ipsum dolor sit amet consectetur adipisicing elit. Asperiores delectus distinctio blanditiis exercitationem repudiandae quaerat quas eligendi fugit neque placeat?
+        Update: We are thrilled to announce the upcoming launch of our new Interdepartmental Collaboration Portal, designed to enhance collaboration across departments.
     </div>
   </>
 }
