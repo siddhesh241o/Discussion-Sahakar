@@ -33,7 +33,7 @@ const customMarkerIcon = new L.Icon({
 //   return null;
 // };
 
-const GIS = () => {
+const Geotagging = () => {
   const [projectLocations, setProjectLocations] = useState([]);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [projectName, setProjectName] = useState('');
@@ -73,7 +73,7 @@ const GIS = () => {
   return (
     <div className="bg-gray-100 min-h-screen flex flex-col items-center justify-center p-4 relative">
       <div className="max-w-4xl w-full bg-white shadow-md rounded-lg p-8 mb-4">
-        <h1 className="text-2xl font-bold mb-4">Geographical Information System Pune</h1>
+        <h1 className="text-2xl font-bold mb-4">Geo Tagging System</h1>
 
         <button
           onClick={() => setIsModalOpen(true)}
@@ -192,5 +192,4 @@ const GIS = () => {
   );
 };
 
-export default GIS;
-
+export default Geotagging;

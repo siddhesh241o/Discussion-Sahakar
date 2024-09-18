@@ -56,10 +56,10 @@ const Calendar = () => {
             {new Date(day.date).getDate()}
           </div>
           {day.meetings.map((meeting, i) => (
-            <div key={i} className={`p-1 rounded mt-1 text-xs ${isPast ? 'bg-gray-400 text-white' : 'bg-blue-200'}`}>
+            <div key={i} className={`p-1 rounded mt-1 text-xs ${isPast ? 'bg-green-300 text-white' : 'bg-orange-300'}`}>
               <span className="block font-bold">{meeting.time}</span>
               <span>{meeting.title}</span>
-              {isPast && <span className="text-xs font-semibold text-red-600 ml-2">Done</span>}
+              {isPast && <span className="text-xs font-semibold text-green-700 ml-2">Done</span>}
             </div>
           ))}
         </div>
