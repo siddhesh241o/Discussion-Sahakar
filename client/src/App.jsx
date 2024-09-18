@@ -22,6 +22,7 @@ import Inc_req from '../public/Pages/Inventory_pages/Inc_req.jsx'
 import Out_req from '../public/Pages/Inventory_pages/Out_req.jsx'
 import TopBanner from '../public/Components/TopBanner.jsx'
 import Discussion from '../public/Pages/Discussion.jsx'
+import CreateTask from '../public/Pages/Task_pages/CreateTask.jsx'
 import '../src/App.css'
 
 const App = () => {
@@ -43,6 +44,7 @@ const App = () => {
     <Route path="/Templates" element={<Templates/>} />
     <Route path="/Seminar" element={<Seminar/>} />
     <Route path="/Task" element={<Task/>} />
+    <Route path="/CreateTask" element={<CreateTask/>} />
     <Route path="/PendingTasks" element={<PendingTasks/>} />
     <Route path="/TaskStatus" element={<TaskStatus/>} />
     <Route path="/ProjectDetails" element={<ProjectDetails/>} />

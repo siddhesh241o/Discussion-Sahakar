@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom'; // Import useNavigate
 import { Search, Filter, Plus } from 'lucide-react';
 import TaskStatus from './TaskStatus'; // Import the TaskStatus component
-import Task from './Task';
 
 // RadioInputs component
 const RadioInputs = ({ selected, onChange }) => {
@@ -59,6 +58,11 @@ const TaskTable = () => {
     { id: 'T-12349', name: 'Prepare Presentation', date: '09/11/24', assignedBy: 'Eva Green', department: 'Intra-department', status: 'Pending' },
   ];
 
+  // Function to navigate to CreateTask page
+  const handleAddTaskClick = () => {
+    navigate('/CreateTask');
+  };
+
   return (
     <div className="p-6 bg-gray-100 min-h-screen">
       <h1 className="text-2xl font-bold mb-4">Task List</h1>
@@ -77,7 +81,10 @@ const TaskTable = () => {
               <Filter size={20} className="mr-2" />
               Filters
             </button>
-            <button className="flex items-center px-4 py-2 bg-blue-600 text-white rounded-md">
+            <button
+              className="flex items-center px-4 py-2 bg-blue-600 text-white rounded-md"
+              onClick={handleAddTaskClick} // Navigate to CreateTask on click
+            >
               <Plus size={20} className="mr-2" />
               Add Task
             </button>
