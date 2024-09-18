@@ -2,50 +2,132 @@ import React, { useState } from 'react';
 
 const departments = {
   water: {
-    title: "Water Department",
+    title: "Office Memorandum",
     type: "Reports, Letters, Maintenance Schedules, Compliance Documents",
-    description: "The Water Department oversees water supply, treatment, and distribution. It ensures clean drinking water is available to all citizens and manages infrastructure like pipelines, reservoirs, and water treatment plants. The department also handles water quality testing and conservation efforts.",
-    letter: `Vijay Nagar D-5
-Civil Ward – 6
-Jabera (MP)
-Jan.25, 2015
-To
-The Administrator
-Municipal Corporation Office
-Jabera (MP)
-Subject – Regarding better water supply
-Respected Sir,
-With due respect, I beg to say that I live in Vijay Nagar D-5 in Civil Ward – 6. It is a thickly populated area. Being a industry locality, it is also famous area in our city. But the water supply in our locality is not regular. It is made one time in two days and for a short time. Sometimes the water supply is not made for three days continuously. Other resources of water are not in well condition here. There are only two Hand Pumps in our locality. They are either in bad condition or out of control. They supply very little water after the hard labor. It is not enough for the people of this locality. Even the wells in our locality are dry. People cannot get water from them enough to fulfill their needs. Because of this people have to fetch water from a long distance. They spend a lot of time in bringing water. This affects in their daily work. The time which they have to spend on their necessary work has to spend on bringing water.
-Therefore I request the concerning authorities to look into the matter seriously and take necessary steps for solving the problem. So the water supply may kindly be made daily in our locality. People may get rid of the problem of poor water supply.
-I shall be highly obliged to you.
-Thanking you sir,
-Yours Faithfully
-Veenu`
+    description:
+      "An office memorandum is an internal document written to inform employees of policy, procedures, announcements, or instructions.",
+    letter: `Subject: Internal Office Policy Update
+
+Dear [Recipient],
+
+This memorandum serves as a notification regarding [Policy/Procedure]. 
+Please be advised that the following changes will take effect immediately:
+
+1. [Change 1]
+2. [Change 2]
+3. [Change 3]
+
+For any further clarification, contact [Department Name].
+
+Sincerely,
+[Your Name]
+[Your Title]`
   },
   fire: {
-    title: "Fire Department",
+    title: "Office Order",
     type: "Incident Reports, Emergency Response Guidelines, Safety Regulations",
-    description: "The Fire Department is responsible for responding to fire emergencies, rescuing citizens, and ensuring fire safety standards are upheld. It conducts regular inspections of buildings, offers fire safety training, and coordinates with local authorities during emergencies."
+    description: "An office order is used for issuing specific instructions or assignments to individuals or departments.",
+    letter: `Office Order No. [Order Number]
+    
+Subject: [Subject of the Office Order]
+
+The following orders are issued with immediate effect:
+
+1. [Order Details]
+2. [Order Details]
+
+All concerned are directed to comply with the above instructions.
+
+By Order,
+[Your Name]
+[Your Title]`
   },
-  transport: {
-    title: "Road Transport Department",
-    type: "Roadwork Notifications, Infrastructure Reports, Safety Audits",
-    description: "The Road Transport Department manages the planning, construction, and maintenance of public roads and highways. It ensures smooth transportation routes for vehicles and pedestrians, conducts traffic safety audits, and collaborates with other departments for major infrastructure projects."
+  earth: {
+    title: "Demand for Grant",
+    type: "Budget Requests, Financial Allocation",
+    description: "A demand for grant is a formal request for the allocation of government funds for specific purposes.",
+    letter: `To,
+The Financial Secretary,
+[Government Department]
+
+Subject: Demand for Grant for [Purpose]
+
+Dear Sir/Madam,
+
+In accordance with the financial rules, 
+I am requesting a grant of [Amount] for the purpose of [Purpose]. 
+The details of the required funds are outlined as follows:
+
+1. [Itemized Cost 1]
+2. [Itemized Cost 2]
+
+Please consider this request at the earliest.
+
+Sincerely,
+[Your Name]
+[Your Title]`
+  },
+  air: {
+    title: "Notice",
+    type: "Public Announcements, Circulars, Alerts",
+    description: "A notice is used for informing the public or specific departments about important updates or actions.",
+    letter: `NOTICE
+
+Subject: [Subject of the Notice]
+
+This is to inform all concerned that [Notice Details]. 
+The following actions are required to be completed by [Deadline]:
+
+1. [Action Item 1]
+2. [Action Item 2]
+
+For further information, please contact [Contact Information].
+
+Issued by,
+[Your Name]
+[Your Title]`
+  },
+  forest: {
+    title: "Circular",
+    type: "Internal Communication, Policy Updates",
+    description: "A circular is an internal communication document used to disseminate information within an organization.",
+    letter: `CIRCULAR
+
+Subject: [Subject of the Circular]
+
+It is hereby informed that [Details of the Information]. 
+The relevant guidelines and instructions are as follows:
+
+1. [Instruction 1]
+2. [Instruction 2]
+
+Please ensure compliance with the above.
+
+Sincerely,
+[Your Name]
+[Your Title]`
   },
   health: {
-    title: "Public Health Department",
-    type: "Health Advisories, Vaccination Programs, Sanitation Reports",
-    description: "The Public Health Department is responsible for promoting and protecting the health of the community. It manages vaccination programs, conducts health awareness campaigns, monitors disease outbreaks, and ensures proper sanitation standards are maintained across the city."
-  },
-  education: {
-    title: "Education Department",
-    type: "Curriculum Guidelines, School Reports, Teacher Training Programs",
-    description: "The Education Department oversees the public education system, develops curriculum standards, manages school facilities, and implements educational policies. It also coordinates teacher training programs and monitors student performance across various educational institutions."
-  },
-  parks: {
-    title: "Parks and Recreation Department",
-    type: "Event Schedules, Maintenance Reports, Facility Bookings",
-    description: "The Parks and Recreation Department manages public parks, recreational facilities, and community centers. It organizes community events, maintains green spaces, and provides programs for citizens of all ages to promote physical activity and community engagement."
+    title: "Notification",
+    type: "Government Orders, Official Announcements",
+    description: "A notification is a formal announcement issued by a government body regarding rules, regulations, or decisions.",
+    letter: `GOVERNMENT OF [STATE]
+
+NOTIFICATION
+
+Subject: [Subject of the Notification]
+
+In exercise of the powers conferred under [Relevant Law], 
+the government hereby notifies the following:
+
+1. [Notification Detail 1]
+2. [Notification Detail 2]
+
+This notification takes effect from [Date].
+
+By order of the Government,
+[Your Name]
+[Your Title]`
   }
 };
 

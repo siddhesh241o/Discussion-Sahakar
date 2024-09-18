@@ -17,7 +17,7 @@ const Discussion = () => {
   return <>
 
     <div className="discuss-main w-11/12 m-auto border	p-3">
-      <div className="bg-orange-300	 w-28" >
+    <div className="bg-white w-28 border border-black">
         <ul className='flex flex-col justify-center p-3'>
           <li ><img src={profile} alt="profile" /></li>
           <li><img src={chat} width={50} className='m-auto mt-10' /></li>
@@ -42,7 +42,7 @@ const Discussion = () => {
         <hr />
         <div className="flex items-center	gap-4 ">
           <img src={profile} alt="profile" className='w-12' />
-          <p>Transportation</p>
+          <p>Transport</p>
         </div>
         <hr />
         <div className="flex items-center	gap-4 ">
@@ -66,7 +66,7 @@ const Discussion = () => {
         </div>
         <div className="flex items-center  gap-4 ">
           <img src={profile} alt="profile" className='w-12' />
-          <p>Pranav(Lead)</p>
+          <p>Pranav</p>
         </div>
         <div className="flex items-center  gap-4 ">
           <img src={profile} alt="profile" className='w-12' />
@@ -96,13 +96,13 @@ const Discussion = () => {
         <hr />
       
       <div className="chat mt-10 bg-orange-200 ml-5 max-w-20 p-3 flex items-center justify-center rounded-md">
-        <p>Helloo</p>
+        <p>Good Morning sir,</p>
       </div>
       <div className="chat mt-5 bg-orange-200 ml-5 p-3 max-w-48  flex items-center justify-center rounded-md">
-        <p>Can you please send me the Reports</p>
+        <p>Could you please send me the Reports</p>
       </div>
       <div className="chat mt-10 bg-indigo-300 ml-5 max-w-20 p-2.5 float float-right mr-5	rounded-md">
-        <p>No</p>
+        <p>Yes Sure</p>
       </div>
     <div className="mt-60 p-3" >
     <div className="msg flex gap-8 items-center border rounded-md p-3">
