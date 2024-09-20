@@ -11,7 +11,7 @@ const TopBanner = () => {
     <div className="top-banner">
       <img class="gov-logo" src={gov_logo} alt="Logo" width={150} />
       <div className="ban-text" style={{textAlign:'center'}}>
-        <h2>SAHAKARA</h2>
+        <h2>SAHAKAR</h2>
         <h3>Connecting Departments, Empowering Progress</h3>
       </div>
       <button onClick={HandleLogOut} id='logout-but'>LogOut</button>
