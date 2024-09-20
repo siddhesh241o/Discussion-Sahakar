@@ -1,185 +1,219 @@
 import React from 'react';
-import { Clipboard, AlertCircle, Fullscreen } from 'lucide-react';
+import { PieChart, Pie, Cell, BarChart, Bar, XAxis, YAxis, Tooltip, LineChart, Line, AreaChart, Area } from 'recharts';
+import { BarChart2, GitBranch, MessageSquare, Bell, Calendar, Settings } from 'lucide-react';
+import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet';
+import 'leaflet/dist/leaflet.css';
 
-const ProjectDetails = () => {
-  const projectDetails = {
-    name: "Gas Pipeline Installation Project",
-    description: "This project aims to install gas pipelines under existing roads to expand the city's natural gas infrastructure.",
-    scope: "Installation of 50 miles of gas pipelines beneath major city roads.",
-    timeline: "Start: January 2025, End: December 2026",
-    estimatedCost: "$25 million",
-    fundingSources: "Municipal bonds and federal infrastructure grants",
-    designSpecs: "36-inch diameter steel pipes, minimum depth of 4 feet",
-    permits: "City excavation permit, Environmental impact assessment",
-    riskAssessment: "Traffic disruption, potential utility line conflicts",
-    progressReports: "Monthly updates to city council and stakeholders"
-  };
+const ProjectDashboard = () => {
+  const requestsData = [
+    { name: 'Mobile', value: 50 },
+    { name: 'Desktop', value: 30 },
+    { name: 'Tablet', value: 20 },
+  ];
 
-  const styles = {
-    container: {
-      display: 'flex',
-      height: '100%',
-      backgroundColor: '#f3f4f6', // Light gray background
-    },
-    sectionTitle: {
-      fontSize: '1.75rem',
-      fontWeight: 'bold',
-      marginBottom: '16px',
-      color: '#2563eb', // Blue color for section title
-    },
-    detailsSection: {
-      width: '50%',
-      padding: '24px',
-      overflowY: 'auto',
-    },
-    detailsCard: {
-      backgroundColor: 'white',
-      borderRadius: '12px',
-      boxShadow: '0px 4px 20px rgba(0, 0, 0, 0.1)',
-      padding: '24px',
-    },
-    cardTitle: {
-      fontSize: '1.5rem',
-      fontWeight: 'bold',
-      marginBottom: '20px',
-      color: '#1e40af', // Darker blue for card title
-      borderBottom: '2px solid #3b82f6',
-      paddingBottom: '8px',
-    },
-    detailItem: {
-      marginBottom: '16px',
-      padding: '12px',
-      backgroundColor: '#f0f9ff', // Light blue background
-      borderRadius: '8px',
-      transition: 'all 0.3s ease',
-    },
-    detailTitle: {
-      fontWeight: 600,
-      textTransform: 'capitalize',
-      color: '#1e40af', // Darker blue for detail titles
-      marginBottom: '4px',
-    },
-    detailContent: {
-      color: '#4b5563', // Gray color for content
-    },
-    progressSection: {
-      width: '50%',
-      padding: '24px',
-      backgroundColor: '#e5e7eb',
-    },
-    progressTimeline: {
-      display: 'flex',
-      flexDirection: 'column',
-      gap: '16px',
-    },
-    taskCard: {
-      width: '240px',
-      height: '240px',
-      padding: '16px',
-      borderRadius: '8px',
-      display: 'flex',
-      alignItems: 'center',
-      gap: '16px',
-      marginBottom:'2vh',
-      border: '2px solid black',
-    },
-    right: {
-      float: 'right',
-      backgroundColor: '#22c55e', // Green
-    },
-    left: {
-      float: 'left',
-      backgroundColor: '#fb923c', // Orange
-    },
-    taskNumber: {
-      fontSize: '2rem',
-      fontWeight: 'bold',
-    },
-    taskTitle: {
-      fontSize: '1.25rem',
-      fontWeight: 600,
-    },
-    actionButtons: {
-      position: 'fixed',
-      bottom: '24px',
-      right: '24px',
-      display: 'flex',
-      gap: '16px',
-    },
-    actionBtn: {
-      padding: '12px',
-      borderRadius: '50%',
-      boxShadow: '0px 4px 6px rgba(0, 0, 0, 0.1)',
-      transition: 'all 0.3s ease',
-    },
-    yellow: {
-      backgroundColor: '#facc15',
-    },
-    blue: {
-      backgroundColor: '#3b82f6',
-    },
-  };
+  const errorData = [
+    { name: 'XXX', value: 11 },
+    { name: 'YYY', value: 5 },
+    { name: 'ZZZ', value: 4 },
+  ];
+
+  const newAlertsData = [
+    { id: '01', type: 'Error', time: '11:35' },
+    { id: '02', type: 'Order', time: '11:30' },
+    { id: '03', type: 'Error', time: '11:25' },
+  ];
+
+  const avgLatencyData = [
+    { name: '1', Request: 4, Error: 2 },
+    { name: '2', Request: 3, Error: 1 },
+    { name: '3', Request: 5, Error: 3 },
+    { name: '4', Request: 2, Error: 1 },
+    { name: '5', Request: 4, Error: 2 },
+    { name: '6', Request: 3, Error: 1 },
+  ];
+
+  const latencyDistributionData = [
+    { name: '1', value: 4 },
+    { name: '2', value: 3 },
+    { name: '3', value: 5 },
+    { name: '4', value: 2 },
+    { name: '5', value: 4 },
+    { name: '6', value: 3 },
+    { name: '7', value: 5 },
+    { name: '8', value: 6 },
+  ];
 
   return (
-    <div style={styles.container}>
-      {/* Project Details Section */}
-      <div style={styles.detailsSection}>
-        <h2 style={styles.sectionTitle}>Project Details</h2>
-        <div style={styles.detailsCard}>
-          <h3 style={styles.cardTitle}>{projectDetails.name}</h3>
-          {Object.entries(projectDetails).map(([key, value]) => (
-            <div key={key} style={styles.detailItem}>
-              <h4 style={styles.detailTitle}>{key.replace(/([A-Z])/g, ' $1').trim()}:</h4>
-              <p style={styles.detailContent}>{value}</p>
-            </div>
-          ))}
+    <div className="flex h-screen bg-gray-100">
+      {/* Sidebar */}
+      <div className="w-16 bg-blue-600 flex flex-col items-center py-4 space-y-8">
+        <div className="w-10 h-10 bg-white rounded-full flex items-center justify-center text-blue-600 font-bold">G</div>
+        <BarChart2 className="text-white" />
+        <GitBranch className="text-white" />
+        <MessageSquare className="text-white" />
+        <Bell className="text-white" />
+        <Calendar className="text-white" />
+        <Settings className="text-white" />
+        <div className="mt-auto">
+          <img src="/api/placeholder/40/40" alt="User" className="w-10 h-10 rounded-full" />
         </div>
       </div>
 
-      {/* Progress Tracking Section */}
-      <div style={styles.progressSection}>
-        <h2 style={styles.sectionTitle}>Progress Tracking</h2>
-        <div style={styles.progressTimeline}>
-          {/* Completed Task (Right) */}
-          <div style={{ ...styles.taskCard, marginLeft: 'auto', ...styles.right }}>
-            <div style={styles.taskNumber}>01</div>
-            <div>
-              <h3 style={styles.taskTitle}>Completed</h3>
-              <p>Submit a formal request with project details</p>
+      {/* Main content */}
+      <div className="flex-1 overflow-y-auto">
+        {/* Header */}
+        <header className="bg-white shadow p-4">
+          <h1 className="text-2xl font-bold">Project</h1>
+          <nav className="mt-2">
+            <ul className="flex space-x-4 text-gray-500">
+              <li className="text-blue-600 border-b-2 border-blue-600">Dashboard</li>
+              <li>Timeline</li>
+              <li>Alerts</li>
+              <li>Details</li>
+              <li>Requests</li>
+            </ul>
+          </nav>
+        </header>
+
+        {/* Dashboard content */}
+        <div className="p-6 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+          {/* Requests by Devices */}
+          <div className="bg-white p-4 rounded-lg shadow">
+            <h2 className="text-sm font-semibold mb-2 text-gray-500">REQUESTS BY DEVICES</h2>
+            <div className="flex items-center justify-between">
+              <PieChart width={120} height={120}>
+                <Pie data={requestsData} dataKey="value" nameKey="name" cx="50%" cy="50%" outerRadius={50} fill="#8884d8">
+                  {requestsData.map((entry, index) => (
+                    <Cell key={`cell-${index}`} fill={['#FF6384', '#36A2EB', '#FFCE56'][index % 3]} />
+                  ))}
+                </Pie>
+              </PieChart>
+              <div className="text-right">
+                <div className="text-2xl font-bold">30/s</div>
+                <div className="text-sm text-green-500">↑ 10%</div>
+              </div>
+            </div>
+            <div className="mt-2 text-sm">
+              {requestsData.map((entry, index) => (
+                <div key={index} className="flex items-center justify-between">
+                  <span>{entry.name}</span>
+                  <span>{entry.value}%</span>
+                </div>
+              ))}
             </div>
           </div>
 
-          {/* In Progress Task (Left) */}
-          <div style={{ ...styles.taskCard, ...styles.left }}>
-            <div style={styles.taskNumber}>02</div>
-            <div>
-              <h3 style={styles.taskTitle}>Status: 90%</h3>
-              <p>Civil Department: Schedule an inspection</p>
+          {/* Error by Type */}
+          <div className="bg-white p-4 rounded-lg shadow">
+            <h2 className="text-sm font-semibold mb-2 text-gray-500">ERROR BY TYPE</h2>
+            <div className="flex items-center justify-between">
+              <PieChart width={120} height={120}>
+                <Pie data={errorData} dataKey="value" nameKey="name" cx="50%" cy="50%" outerRadius={50} fill="#8884d8">
+                  {errorData.map((entry, index) => (
+                    <Cell key={`cell-${index}`} fill={['#FF6384', '#36A2EB', '#FFCE56'][index % 3]} />
+                  ))}
+                </Pie>
+              </PieChart>
+              <div className="text-right">
+                <div className="text-2xl font-bold">11/s</div>
+                <div className="text-sm text-red-500">↓ 10%</div>
+              </div>
+            </div>
+            <div className="mt-2 text-sm">
+              {errorData.map((entry, index) => (
+                <div key={index} className="flex items-center justify-between">
+                  <span>{entry.name}</span>
+                  <span>{entry.value}</span>
+                </div>
+              ))}
             </div>
           </div>
 
-          {/* Locked Task (Right) */}
-          <div style={{ ...styles.taskCard, ...styles.right, marginLeft: 'auto' }}>
-            <div style={styles.taskNumber}>03</div>
-            <div>
-              <h3 style={styles.taskTitle}>Locked Task</h3>
-              <p>Submit a formal request with project details</p>
-            </div>
+          {/* New Alerts */}
+          <div className="bg-white p-4 rounded-lg shadow">
+            <h2 className="text-sm font-semibold mb-2 text-gray-500">NEW ALERTS</h2>
+            <ul className="text-sm">
+              {newAlertsData.map((alert) => (
+                <li key={alert.id} className="flex justify-between items-center mb-2">
+                  <span className={`w-2 h-2 rounded-full ${alert.type === 'Error' ? 'bg-red-500' : 'bg-yellow-500'}`}></span>
+                  <span>Alert {alert.id}</span>
+                  <span>{alert.type}</span>
+                  <span>{alert.time}</span>
+                </li>
+              ))}
+            </ul>
           </div>
+
+          {/* Avg Latency */}
+          <div className="bg-white p-4 rounded-lg shadow">
+            <h2 className="text-sm font-semibold mb-2 text-gray-500">AVG LATENCY</h2>
+            <div className="flex items-center">
+              <div className="text-2xl font-bold mr-2">4</div>
+              <div className="text-sm text-red-500">↑ 15%</div>
+            </div>
+            <BarChart width={200} height={100} data={avgLatencyData} margin={{ top: 5, right: 0, left: 0, bottom: 5 }}>
+              <XAxis dataKey="name" tick={false} />
+              <Tooltip />
+              <Bar dataKey="Request" fill="#8884d8" />
+              <Bar dataKey="Error" fill="#82ca9d" />
+            </BarChart>
+          </div>
+
+          {/* Healthscore */}
+          <div className="bg-white p-4 rounded-lg shadow">
+            <h2 className="text-sm font-semibold mb-2 text-gray-500">HEALTHSCORE</h2>
+            <div className="flex items-center">
+              <div className="text-2xl font-bold mr-2">82</div>
+              <div className="text-sm text-green-500">↑ 10%</div>
+            </div>
+            <LineChart width={200} height={100} data={avgLatencyData}>
+              <Line type="monotone" dataKey="Request" stroke="#8884d8" strokeWidth={2} dot={false} />
+            </LineChart>
+          </div>
+
+          {/* Services */}
+          <div className="bg-white p-4 rounded-lg shadow">
+            <h2 className="text-sm font-semibold mb-2 text-gray-500">SERVICES</h2>
+            <div className="flex items-center">
+              <div className="text-2xl font-bold mr-2">5</div>
+              <div className="text-sm text-green-500">↑ 10%</div>
+            </div>
+            <AreaChart width={200} height={100} data={latencyDistributionData}>
+              <Area type="monotone" dataKey="value" fill="#8884d8" stroke="#8884d8" />
+            </AreaChart>
+          </div>
+
+          {/* Latency by Location */}
+          <div className="bg-white p-4 rounded-lg shadow col-span-1 md:col-span-2">
+            <h2 className="text-sm font-semibold mb-2 text-gray-500">LATENCY BY LOCATION</h2>
+            <MapContainer center={[51.505, -0.09]} zoom={2} style={{ height: '300px', width: '100%' }}>
+              <TileLayer
+                url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+                attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+              />
+              <Marker position={[51.505, -0.09]}>
+                <Popup>
+                  A sample popup!
+                </Popup>
+              </Marker>
+            </MapContainer>
+          </div>
+
+{/* Latency Distribution
+<div className="bg-white p-4 rounded-lg shadow">
+    <h2 className="text-sm font-semibold mb-2 text-gray-500">LATENCY DISTRIBUTION</h2>
+    <BarChart width={250} height={200} data={avgLatencyData} margin={{ top: 5, right: 0, left: 0, bottom: 5 }}>
+      <XAxis dataKey="name" tick={false} />
+      <Tooltip />
+      <Bar dataKey="Request" fill="#8884d8" />
+      <Bar dataKey="Error" fill="#82ca9d" />
+    </BarChart>
+  </div> */}
+
         </div>
-      </div>
-
-      {/* Floating Action Buttons */}
-      <div style={styles.actionButtons}>
-        <button style={{ ...styles.actionBtn, ...styles.yellow }}>
-          <Clipboard size={24} color="white" />
-        </button>
-        <button style={{ ...styles.actionBtn, ...styles.blue }}>
-          <AlertCircle size={24} color="white" />
-        </button>
       </div>
     </div>
   );
 };
 
-export default ProjectDetails;
+export default ProjectDashboard;
