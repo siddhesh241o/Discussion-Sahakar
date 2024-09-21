@@ -1,71 +1,69 @@
 import React from 'react';
-import { Clipboard, AlertCircle, Fullscreen } from 'lucide-react';
+import { Clipboard, AlertCircle } from 'lucide-react';
+import { PieChart, Pie, Cell, BarChart, Bar, XAxis, YAxis, Tooltip, LineChart, Line, AreaChart, Area } from 'recharts';
+import { BarChart2, GitBranch, MessageSquare, Bell, Calendar, Settings } from 'lucide-react';
+import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet';
+import 'leaflet/dist/leaflet.css';
 
-const ProjectDetails = () => {
-  const projectDetails = {
-    name: "Gas Pipeline Installation Project",
-    description: "This project aims to install gas pipelines under existing roads to expand the city's natural gas infrastructure.",
-    scope: "Installation of 50 miles of gas pipelines beneath major city roads.",
-    timeline: "Start: January 2025, End: December 2026",
-    estimatedCost: "$25 million",
-    fundingSources: "Municipal bonds and federal infrastructure grants",
-    designSpecs: "36-inch diameter steel pipes, minimum depth of 4 feet",
-    permits: "City excavation permit, Environmental impact assessment",
-    riskAssessment: "Traffic disruption, potential utility line conflicts",
-    progressReports: "Monthly updates to city council and stakeholders"
-  };
-
+const ProjectDashboard = () => {
+  const requestsData = [
+    { name: 'Mobile', value: 50 },
+    { name: 'Desktop', value: 30 },
+    { name: 'Tablet', value: 20 },
+  ];
   const styles = {
     container: {
       display: 'flex',
+      flexDirection: 'row', // Stack sections horizontally by default
       height: '100%',
-      backgroundColor: '#f3f4f6', // Light gray background
+      backgroundColor: '#f3f4f6',
+      padding: '16px', // Add some padding for better spacing
+    },
+    detailsSection: {
+      width: '50%',
+      padding: '16px',
+      overflowY: 'auto',
+    },
+    progressSection: {
+      width: '50%',
+      padding: '16px',
+      backgroundColor: '#e5e7eb',
     },
     sectionTitle: {
       fontSize: '1.75rem',
       fontWeight: 'bold',
       marginBottom: '16px',
-      color: '#2563eb', // Blue color for section title
-    },
-    detailsSection: {
-      width: '50%',
-      padding: '24px',
-      overflowY: 'auto',
+      color: '#2563eb',
     },
     detailsCard: {
       backgroundColor: 'white',
       borderRadius: '12px',
       boxShadow: '0px 4px 20px rgba(0, 0, 0, 0.1)',
-      padding: '24px',
+      padding: '16px',
     },
     cardTitle: {
       fontSize: '1.5rem',
       fontWeight: 'bold',
       marginBottom: '20px',
-      color: '#1e40af', // Darker blue for card title
+      color: '#1e40af',
       borderBottom: '2px solid #3b82f6',
       paddingBottom: '8px',
     },
     detailItem: {
       marginBottom: '16px',
       padding: '12px',
-      backgroundColor: '#f0f9ff', // Light blue background
+      backgroundColor: '#f0f9ff',
       borderRadius: '8px',
       transition: 'all 0.3s ease',
     },
     detailTitle: {
       fontWeight: 600,
       textTransform: 'capitalize',
-      color: '#1e40af', // Darker blue for detail titles
+      color: '#1e40af',
       marginBottom: '4px',
     },
     detailContent: {
-      color: '#4b5563', // Gray color for content
-    },
-    progressSection: {
-      width: '50%',
-      padding: '24px',
-      backgroundColor: '#e5e7eb',
+      color: '#4b5563',
     },
     progressTimeline: {
       display: 'flex',
@@ -80,16 +78,14 @@ const ProjectDetails = () => {
       display: 'flex',
       alignItems: 'center',
       gap: '16px',
-      marginBottom:'2vh',
+      marginBottom: '2vh',
       border: '2px solid black',
     },
     right: {
-      float: 'right',
-      backgroundColor: '#22c55e', // Green
+      backgroundColor: '#22c55e',
     },
     left: {
-      float: 'left',
-      backgroundColor: '#fb923c', // Orange
+      backgroundColor: '#fb923c',
     },
     taskNumber: {
       fontSize: '2rem',
@@ -118,7 +114,63 @@ const ProjectDetails = () => {
     blue: {
       backgroundColor: '#3b82f6',
     },
+    '@media (max-width: 768px)': {
+      container: {
+        flexDirection: 'column', // Stack sections vertically on mobile
+      },
+      detailsSection: {
+        width: '100%', // Full width for details section on mobile
+        padding: '16px',
+      },
+      progressSection: {
+        width: '100%', // Full width for progress section on mobile
+        padding: '16px',
+      },
+      taskCard: {
+        width: '100%', // Task cards take full width on mobile
+        height: 'auto', // Adjust height for better fit on mobile
+      },
+      taskNumber: {
+        fontSize: '1.5rem', // Reduce task number font size on mobile
+      },
+      actionButtons: {
+        bottom: '16px',
+        right: '16px',
+      },
+    },
   };
+
+  const errorData = [
+    { name: 'XXX', value: 11 },
+    { name: 'YYY', value: 5 },
+    { name: 'ZZZ', value: 4 },
+  ];
+
+  const newAlertsData = [
+    { id: '01', type: 'Error', time: '11:35' },
+    { id: '02', type: 'Order', time: '11:30' },
+    { id: '03', type: 'Error', time: '11:25' },
+  ];
+
+  const avgLatencyData = [
+    { name: '1', Request: 4, Error: 2 },
+    { name: '2', Request: 3, Error: 1 },
+    { name: '3', Request: 5, Error: 3 },
+    { name: '4', Request: 2, Error: 1 },
+    { name: '5', Request: 4, Error: 2 },
+    { name: '6', Request: 3, Error: 1 },
+  ];
+
+  const latencyDistributionData = [
+    { name: '1', value: 4 },
+    { name: '2', value: 3 },
+    { name: '3', value: 5 },
+    { name: '4', value: 2 },
+    { name: '5', value: 4 },
+    { name: '6', value: 3 },
+    { name: '7', value: 5 },
+    { name: '8', value: 6 },
+  ];
 
   return (
     <div className="flex h-screen bg-gray-100">
@@ -293,4 +345,5 @@ const ProjectDetails = () => {
   );
 };
 
-export default ProjectDetails;
+export default ProjectDashboard;
+
