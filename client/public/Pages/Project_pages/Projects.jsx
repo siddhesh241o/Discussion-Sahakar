@@ -5,9 +5,14 @@ import bannerImage from '/Images/Proj_banner.png';
 
 const Sidebar = () => {
   const [isOpen, setIsOpen] = useState(false); // State to toggle sidebar
+  const navigate = useNavigate(); // Initialize navigate
 
   const toggleSidebar = () => {
     setIsOpen(!isOpen);
+  };
+
+  const handleNavigation = (path) => {
+    navigate(path); // Navigate to the specified path
   };
 
   return (
@@ -22,9 +27,7 @@ const Sidebar = () => {
 
       {/* Sidebar */}
       <aside
-        className={`w-64 bg-blue-900 text-white p-4 h-screen md:block ${
-          isOpen ? 'block' : 'hidden'
-        } md:h-screen md:relative absolute top-0 left-0 z-20 md:z-auto`}
+        className={`w-64 bg-blue-900 text-white p-4 h-screen md:block ${isOpen ? 'block' : 'hidden'} md:h-screen md:relative absolute top-0 left-0 z-20 md:z-auto`}
       >
         <nav>
           {[
@@ -44,9 +47,13 @@ const Sidebar = () => {
             'Complaints',
             'Office Budget',
           ].map((item) => (
-            <a key={item} href="#" className="block py-2 px-4 hover:bg-blue-700 rounded">
+            <button
+              key={item}
+              onClick={() => handleNavigation(item === 'My Profile' ? '/MyProfile' : '#')}
+              className="block py-2 px-4 hover:bg-blue-700 rounded text-left w-full"
+            >
               {item}
-            </a>
+            </button>
           ))}
         </nav>
       </aside>
