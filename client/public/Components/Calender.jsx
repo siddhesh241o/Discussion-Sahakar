@@ -73,13 +73,13 @@ const Calendar = () => {
       days.push(
         <div
           key={index}
-          className={`border p-2 relative h-20 flex flex-col justify-between cursor-pointer overflow-hidden ${hasMeetings ? (isPast ? 'bg-green-300' : 'bg-orange-300') : 'bg-transparent'}`}
+          className={`border p-2 relative h-20 flex flex-col justify-between cursor-pointer overflow-hidden ${hasMeetings ? (isPast ? 'bg-green-600' : 'bg-orange-300') : 'bg-transparent'}`}
           onClick={() => {
             const meetingContent = day.meetings.map((meeting, i) => (
-              <div key={i} className={`p-1 rounded mt-1 text-xs ${isPast ? 'bg-green-300 text-white' : 'bg-orange-300 text-white'}`}>
+              <div key={i} className={`p-1 rounded mt-1 text-xs ${isPast ? 'bg-green-600 text-white' : 'bg-orange-300 text-white'}`}>
                 <span className="block font-bold">{meeting.time}</span>
                 <span>{meeting.title}</span>
-                {isPast && <span className="text-xs font-semibold text-green-700 ml-2">Done</span>}
+                {isPast && <span className="text-xs font-semibold text-green-700 ml-2"></span>}
               </div>
             ));
             handleCellClick(`Meetings on ${day.date}`, meetingContent);
@@ -89,11 +89,11 @@ const Calendar = () => {
             {new Date(day.date).getDate()}
           </div>
           {hasMeetings && (
-            <div className={`p-1 text-xs truncate ${isPast ? 'bg-green-300 text-white' : 'bg-orange-300 text-white'} flex-1`}>
+            <div className={`p-1 text-xs truncate ${isPast ? 'bg-green-600 text-white' : 'bg-orange-300 text-white'} flex-1`}>
               {day.meetings[0].title}
             </div>
           )}
-          {hasMeetings && isPast && <span className="text-xs font-semibold text-green-700 mt-1">Done</span>}
+          {hasMeetings && isPast && <span className="text-xs font-semibold text-green-700 mt-1"></span>}
         </div>
       );
     });

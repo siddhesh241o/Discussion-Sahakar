@@ -5,7 +5,7 @@ import { Bell, MessageSquare, Calendar, Plus, ChevronRight } from 'lucide-react'
 const Sidebar = () => (
   <div className="w-64 bg-white p-4 flex flex-col h-screen">
     <div className="mb-8">
-      <h2 className="text-xl font-bold">Tasktend</h2>
+      <h2 className="text-xl font-bold">Mr. Ratan Tata</h2>
       <p className="text-sm text-gray-500">Project Management Admin</p>
     </div>
     <nav className="flex-grow">

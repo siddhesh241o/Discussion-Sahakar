@@ -65,7 +65,7 @@ const ProjectList = () => {
   const navigate = useNavigate();
 
   const handleCategoryClick = (id) => {
-    navigate('/ProjectDetails'); // Navigate to ProjectDetails page
+    navigate('/Expense'); // Navigate to ProjectDetails page
   };
 
   return (

@@ -24,6 +24,7 @@ import TopBanner from '../public/Components/TopBanner.jsx'
 import Discussion from '../public/Pages/Discussion.jsx'
 import CreateTask from '../public/Pages/Task_pages/CreateTask.jsx'
 import '../src/App.css'
+import Expense from '../public/Pages/Project_pages/Expense.jsx'
 
 const App = () => {
   return <>
@@ -39,6 +40,7 @@ const App = () => {
     <Route path="/GIS" element={<GIS />} />
     <Route path="/Geotagging" element={<Geotagging />} />
     <Route path="/Complaints" element={<Complaints/>} />
+    <Route path="/Expense" element={<Expense/>}/>
     <Route path="/Projects" element={<Projects/>} />
     <Route path="/CreateProjectForm" element={<CreateProjectForm/>} />
     <Route path="/MyProfile" element={<MyProfile />} />
