@@ -13,7 +13,7 @@ const CreateProjectForm = () => {
   };
 
   return (
-    <div className="max-w-4xl mx-auto p-6 bg-white shadow-lg rounded-lg">
+    <div className="max-w-4xl mx-auto p-6 border-blue-900 border-2 bg-white shadow-lg rounded-lg">
       <h1 className="text-3xl font-bold mb-6">Create New Project</h1>
       
       <form className="space-y-6">
@@ -23,11 +23,11 @@ const CreateProjectForm = () => {
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             <div>
               <label htmlFor="projectTitle" className="block text-sm font-medium text-gray-700">Project Title</label>
-              <input type="text" id="projectTitle" name="projectTitle" className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50" required />
+              <input type="text" id="projectTitle" name="projectTitle" className="mt-1 block w-full rounded-md border-2 border-blue-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50" required />
             </div>
             <div>
               <label htmlFor="projectType" className="block text-sm font-medium text-gray-700">Project Type</label>
-              <select id="projectType" name="projectType" className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50">
+              <select id="projectType" name="projectType" className="mt-1 block w-full rounded-md border-2 border-blue-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50">
                 <option>Bridge Construction</option>
                 <option>Water Pipeline Installation</option>
                 <option>Road Development</option>
@@ -36,11 +36,11 @@ const CreateProjectForm = () => {
             </div>
             <div>
               <label htmlFor="startDate" className="block text-sm font-medium text-gray-700">Start Date</label>
-              <input type="date" id="startDate" name="startDate" className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50" required />
+              <input type="date" id="startDate" name="startDate" className="mt-1 block w-full rounded-md border-2 border-blue-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50" required />
             </div>
             <div>
               <label htmlFor="estimatedEndDate" className="block text-sm font-medium text-gray-700">Estimated End Date</label>
-              <input type="date" id="estimatedEndDate" name="estimatedEndDate" className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50" required />
+              <input type="date" id="estimatedEndDate" name="estimatedEndDate" className="mt-1 block w-full rounded-md border-2 border-blue-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50" required />
             </div>
           </div>
         </section>
@@ -51,15 +51,15 @@ const CreateProjectForm = () => {
           <div className="space-y-4">
             <div>
               <label htmlFor="description" className="block text-sm font-medium text-gray-700">Project Description</label>
-              <textarea id="description" name="description" rows="3" className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50" required></textarea>
+              <textarea id="description" name="description" rows="3" className="mt-1 block w-full rounded-mdborder-2 border-blue-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50" required></textarea>
             </div>
             <div>
               <label htmlFor="objectives" className="block text-sm font-medium text-gray-700">Project Objectives</label>
-              <textarea id="objectives" name="objectives" rows="3" className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50" required></textarea>
+              <textarea id="objectives" name="objectives" rows="3" className="mt-1 block w-full rounded-md border-2 border-blue-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50" required></textarea>
             </div>
             <div>
               <label htmlFor="scope" className="block text-sm font-medium text-gray-700">Project Scope</label>
-              <textarea id="scope" name="scope" rows="3" className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50" required></textarea>
+              <textarea id="scope" name="scope" rows="3" className="mt-1 block w-full rounded-md border-2 border-blue-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50" required></textarea>
             </div>
           </div>
         </section>
@@ -70,15 +70,15 @@ const CreateProjectForm = () => {
           <div className="space-y-4">
             <div>
               <label htmlFor="leadDepartment" className="block text-sm font-medium text-gray-700">Lead Department</label>
-              <input type="text" id="leadDepartment" name="leadDepartment" className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50" required />
+              <input type="text" id="leadDepartment" name="leadDepartment" className="mt-1 block w-full rounded-md border-2 border-blue-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50" required />
             </div>
             <div>
               <label htmlFor="otherDepartments" className="block text-sm font-medium text-gray-700">Other Involved Departments</label>
-              <input type="text" id="otherDepartments" name="otherDepartments" className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50" placeholder="Separate departments with commas" />
+              <input type="text" id="otherDepartments" name="otherDepartments" className="mt-1 block w-full rounded-md border-2 border-blue-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50" placeholder="Separate departments with commas" />
             </div>
             <div>
               <label htmlFor="keyStakeholders" className="block text-sm font-medium text-gray-700">Key Stakeholders</label>
-              <input type="text" id="keyStakeholders" name="keyStakeholders" className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50" placeholder="Separate stakeholders with commas" />
+              <input type="text" id="keyStakeholders" name="keyStakeholders" className="mt-1 block w-full rounded-md border-2 border-blue-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50" placeholder="Separate stakeholders with commas" />
             </div>
           </div>
         </section>
@@ -89,19 +89,19 @@ const CreateProjectForm = () => {
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             <div>
               <label htmlFor="estimatedBudget" className="block text-sm font-medium text-gray-700">Estimated Budget (in INR)</label>
-              <input type="number" id="estimatedBudget" name="estimatedBudget" className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50" required />
+              <input type="number" id="estimatedBudget" name="estimatedBudget" className="mt-1 block w-full rounded-md border-2 border-blue-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50" required />
             </div>
             <div>
               <label htmlFor="fundingSource" className="block text-sm font-medium text-gray-700">Funding Source</label>
-              <input type="text" id="fundingSource" name="fundingSource" className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50" required />
+              <input type="text" id="fundingSource" name="fundingSource" className="mt-1 block w-full rounded-md border-2 border-blue-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50" required />
             </div>
             <div>
               <label htmlFor="manpowerRequired" className="block text-sm font-medium text-gray-700">Estimated Manpower Required</label>
-              <input type="number" id="manpowerRequired" name="manpowerRequired" className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50" required />
+              <input type="number" id="manpowerRequired" name="manpowerRequired" className="mt-1 block w-full rounded-md border-2 border-blue-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50" required />
             </div>
             <div>
               <label htmlFor="keyEquipment" className="block text-sm font-medium text-gray-700">Key Equipment/Resources</label>
-              <input type="text" id="keyEquipment" name="keyEquipment" className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50" placeholder="Separate items with commas" />
+              <input type="text" id="keyEquipment" name="keyEquipment" className="mt-1 block w-full rounded-md border-2 border-blue-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50" placeholder="Separate items with commas" />
             </div>
           </div>
         </section>
@@ -111,7 +111,7 @@ const CreateProjectForm = () => {
           <h2 className="text-xl font-semibold mb-4">5. Milestones and Timeline</h2>
           <div>
             <label htmlFor="milestones" className="block text-sm font-medium text-gray-700">Key Milestones</label>
-            <textarea id="milestones" name="milestones" rows="4" className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50" placeholder="Enter each milestone on a new line with its expected completion date" required></textarea>
+            <textarea id="milestones" name="milestones" rows="4" className="mt-1 block w-full rounded-md border-2 border-blue-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50" placeholder="Enter each milestone on a new line with its expected completion date" required></textarea>
           </div>
         </section>
 
@@ -120,7 +120,7 @@ const CreateProjectForm = () => {
           <h2 className="text-xl font-semibold mb-4">6. Risks and Challenges</h2>
           <div>
             <label htmlFor="risks" className="block text-sm font-medium text-gray-700">Potential Risks and Mitigation Strategies</label>
-            <textarea id="risks" name="risks" rows="4" className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50" placeholder="Describe potential risks and their mitigation strategies" required></textarea>
+            <textarea id="risks" name="risks" rows="4" className="mt-1 block w-full rounded-md border-2 border-blue-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50" placeholder="Describe potential risks and their mitigation strategies" required></textarea>
           </div>
         </section>
 

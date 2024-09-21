@@ -1,5 +1,5 @@
 import React from 'react';
-import { Clipboard, AlertCircle, Fullscreen } from 'lucide-react';
+import { Clipboard, AlertCircle } from 'lucide-react';
 
 const ProjectDetails = () => {
   const projectDetails = {
@@ -18,54 +18,56 @@ const ProjectDetails = () => {
   const styles = {
     container: {
       display: 'flex',
+      flexDirection: 'row', // Stack sections horizontally by default
       height: '100%',
-      backgroundColor: '#f3f4f6', // Light gray background
+      backgroundColor: '#f3f4f6',
+      padding: '16px', // Add some padding for better spacing
+    },
+    detailsSection: {
+      width: '50%',
+      padding: '16px',
+      overflowY: 'auto',
+    },
+    progressSection: {
+      width: '50%',
+      padding: '16px',
+      backgroundColor: '#e5e7eb',
     },
     sectionTitle: {
       fontSize: '1.75rem',
       fontWeight: 'bold',
       marginBottom: '16px',
-      color: '#2563eb', // Blue color for section title
-    },
-    detailsSection: {
-      width: '50%',
-      padding: '24px',
-      overflowY: 'auto',
+      color: '#2563eb',
     },
     detailsCard: {
       backgroundColor: 'white',
       borderRadius: '12px',
       boxShadow: '0px 4px 20px rgba(0, 0, 0, 0.1)',
-      padding: '24px',
+      padding: '16px',
     },
     cardTitle: {
       fontSize: '1.5rem',
       fontWeight: 'bold',
       marginBottom: '20px',
-      color: '#1e40af', // Darker blue for card title
+      color: '#1e40af',
       borderBottom: '2px solid #3b82f6',
       paddingBottom: '8px',
     },
     detailItem: {
       marginBottom: '16px',
       padding: '12px',
-      backgroundColor: '#f0f9ff', // Light blue background
+      backgroundColor: '#f0f9ff',
       borderRadius: '8px',
       transition: 'all 0.3s ease',
     },
     detailTitle: {
       fontWeight: 600,
       textTransform: 'capitalize',
-      color: '#1e40af', // Darker blue for detail titles
+      color: '#1e40af',
       marginBottom: '4px',
     },
     detailContent: {
-      color: '#4b5563', // Gray color for content
-    },
-    progressSection: {
-      width: '50%',
-      padding: '24px',
-      backgroundColor: '#e5e7eb',
+      color: '#4b5563',
     },
     progressTimeline: {
       display: 'flex',
@@ -80,16 +82,14 @@ const ProjectDetails = () => {
       display: 'flex',
       alignItems: 'center',
       gap: '16px',
-      marginBottom:'2vh',
+      marginBottom: '2vh',
       border: '2px solid black',
     },
     right: {
-      float: 'right',
-      backgroundColor: '#22c55e', // Green
+      backgroundColor: '#22c55e',
     },
     left: {
-      float: 'left',
-      backgroundColor: '#fb923c', // Orange
+      backgroundColor: '#fb923c',
     },
     taskNumber: {
       fontSize: '2rem',
@@ -117,6 +117,30 @@ const ProjectDetails = () => {
     },
     blue: {
       backgroundColor: '#3b82f6',
+    },
+    '@media (max-width: 768px)': {
+      container: {
+        flexDirection: 'column', // Stack sections vertically on mobile
+      },
+      detailsSection: {
+        width: '100%', // Full width for details section on mobile
+        padding: '16px',
+      },
+      progressSection: {
+        width: '100%', // Full width for progress section on mobile
+        padding: '16px',
+      },
+      taskCard: {
+        width: '100%', // Task cards take full width on mobile
+        height: 'auto', // Adjust height for better fit on mobile
+      },
+      taskNumber: {
+        fontSize: '1.5rem', // Reduce task number font size on mobile
+      },
+      actionButtons: {
+        bottom: '16px',
+        right: '16px',
+      },
     },
   };
 

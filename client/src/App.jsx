@@ -29,8 +29,10 @@ const App = () => {
   return <>
   <BrowserRouter>
   <TopBanner />
+  
   <Routes>
     <Route path="/"  element={<Login />} />
+
     <Route path="/Dashboard" element={<Dashboard />} />
     <Route path="/MyProfile" element={<MyProfile />} />
     <Route path="/Inventory" element={<Inventory />} />
@@ -52,10 +54,6 @@ const App = () => {
     <Route path="/Inc_req" element={<Inc_req/>} />
     <Route path="/Out_req" element={<Out_req/>} />
     <Route path="/Discussion" element={<Discussion/>} />
-
-
-
-    
   </Routes>
   </BrowserRouter>
   </>

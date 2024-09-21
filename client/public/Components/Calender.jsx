@@ -1,4 +1,5 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
+import Modal from './Modal'; // Import the Modal component
 
 const Calendar = () => {
   const dummyMeetings = {
@@ -11,6 +12,8 @@ const Calendar = () => {
   };
 
   const [currentMonth, setCurrentMonth] = useState(new Date());
+  const [modalOpen, setModalOpen] = useState(false);
+  const [modalContent, setModalContent] = useState({ title: '', content: '' });
   const today = new Date();
 
   const startOfMonth = new Date(currentMonth.getFullYear(), currentMonth.getMonth(), 1);
@@ -37,46 +40,85 @@ const Calendar = () => {
     setCurrentMonth(new Date(currentMonth.getFullYear(), currentMonth.getMonth() + 1));
   };
 
+  const handleCellClick = (title, content) => {
+    setModalContent({ title, content });
+    setModalOpen(true);
+  };
+
   const renderDays = () => {
     const daysInPrevMonth = new Date(currentMonth.getFullYear(), currentMonth.getMonth(), 0).getDate();
     const startDayOfWeek = startOfMonth.getDay();
-
     let days = [];
+
+    // Fill in days from the previous month
     for (let i = startDayOfWeek - 1; i >= 0; i--) {
-      days.push(<div key={`prev-${i}`} className="border p-1 h-20 text-gray-400 text-sm">{daysInPrevMonth - i}</div>);
+      days.push(
+        <div
+          key={`prev-${i}`}
+          className="border p-2 h-20 flex items-center justify-center relative text-gray-400"
+        >
+          <div className="absolute top-0 right-0 p-1 text-xs rounded-full">
+            {daysInPrevMonth - i}
+          </div>
+        </div>
+      );
     }
 
+    // Fill in days of the current month
     generateDays().forEach((day, index) => {
       const dayDate = new Date(day.date);
       const isPast = dayDate < today;
+      const hasMeetings = day.meetings.length > 0;
 
       days.push(
-        <div key={index} className={`border p-1 relative h-20 ${isPast ? 'bg-gray-100' : ''}`}>
+        <div
+          key={index}
+          className={`border p-2 relative h-20 flex flex-col justify-between cursor-pointer overflow-hidden ${hasMeetings ? (isPast ? 'bg-green-300' : 'bg-orange-300') : 'bg-transparent'}`}
+          onClick={() => {
+            const meetingContent = day.meetings.map((meeting, i) => (
+              <div key={i} className={`p-1 rounded mt-1 text-xs ${isPast ? 'bg-green-300 text-white' : 'bg-orange-300 text-white'}`}>
+                <span className="block font-bold">{meeting.time}</span>
+                <span>{meeting.title}</span>
+                {isPast && <span className="text-xs font-semibold text-green-700 ml-2">Done</span>}
+              </div>
+            ));
+            handleCellClick(`Meetings on ${day.date}`, meetingContent);
+          }}
+        >
           <div className="absolute top-0 right-0 p-1 text-xs">
             {new Date(day.date).getDate()}
           </div>
-          {day.meetings.map((meeting, i) => (
-            <div key={i} className={`p-1 rounded mt-1 text-xs ${isPast ? 'bg-green-300 text-white' : 'bg-orange-300'}`}>
-              <span className="block font-bold">{meeting.time}</span>
-              <span>{meeting.title}</span>
-              {isPast && <span className="text-xs font-semibold text-green-700 ml-2">Done</span>}
+          {hasMeetings && (
+            <div className={`p-1 text-xs truncate ${isPast ? 'bg-green-300 text-white' : 'bg-orange-300 text-white'} flex-1`}>
+              {day.meetings[0].title}
             </div>
-          ))}
+          )}
+          {hasMeetings && isPast && <span className="text-xs font-semibold text-green-700 mt-1">Done</span>}
         </div>
       );
     });
 
+    // Fill in days from the next month
     const daysInNextMonth = 42 - days.length;
     for (let i = 1; i <= daysInNextMonth; i++) {
-      days.push(<div key={`next-${i}`} className="border p-1 h-20 text-gray-400 text-sm">{i}</div>);
+      days.push(
+        <div
+          key={`next-${i}`}
+          className="border p-2 h-20 flex items-center justify-center relative text-gray-400"
+        >
+          <div className="absolute top-0 right-0 p-1 text-xs rounded-full">
+            {i}
+          </div>
+        </div>
+      );
     }
 
     return days;
   };
 
   return (
-    <div className="p-2">
-      <div className="flex justify-between items-center mb-2">
+    <div className="p-4">
+      <div className="flex justify-between items-center mb-4">
         <button onClick={prevMonth} className="bg-blue-500 text-white px-3 py-1 rounded">
           Previous
         </button>
@@ -95,6 +137,14 @@ const Calendar = () => {
 
         {renderDays()}
       </div>
+
+      {/* Modal */}
+      <Modal
+        isOpen={modalOpen}
+        onClose={() => setModalOpen(false)}
+        title={modalContent.title}
+        content={modalContent.content}
+      />
     </div>
   );
 };
