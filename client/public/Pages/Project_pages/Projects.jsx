@@ -55,7 +55,7 @@ const Sidebar = () => {
 };
 
 const ProjectList = () => {
-  const navigate = useNavigate(); // Initialize navigate
+  const navigate = useNavigate();
 
   const handleCategoryClick = (id) => {
     navigate('/ProjectDetails'); // Navigate to ProjectDetails page
@@ -64,16 +64,16 @@ const ProjectList = () => {
   return (
     <div className="mt-6">
       {[
-        { id: 6432, name: 'National Gas Infrastructure Development Plan', progress: 100, category: 'Energy' },
-        { id: 4530, name: 'National Gas Pipeline Expansion Initiative', progress: 64, category: 'Transport' },
-        { id: 2343, name: 'National Highway Expansion Project', progress: 66, category: 'Water' },
-        { id: 1234, name: 'Maharashtra Highway Expansion Project', progress: 38, category: 'Gas' },
+        { id: 6432, name: 'National Gas Infrastructure Development Plan', progress: 100 },
+        { id: 4530, name: 'National Gas Pipeline Expansion Initiative', progress: 64 },
+        { id: 2343, name: 'National Highway Expansion Project', progress: 66 },
+        { id: 1234, name: 'Maharashtra Highway Expansion Project', progress: 38 },
       ].map((project) => (
         <div key={project.id} className="mb-4 bg-white p-4 rounded-lg shadow">
           <div className="flex justify-between items-center mb-2">
             <span className="font-semibold">{project.id} - {project.name}</span>
             <button
-              onClick={() => handleCategoryClick(project.id)} // Handle click
+              onClick={() => handleCategoryClick(project.id)}
               className="text-sm bg-blue-600 text-white px-2 py-1 rounded"
             >
               View Project
@@ -90,7 +90,7 @@ const ProjectList = () => {
 };
 
 const Projects = () => {
-  const navigate = useNavigate(); // Initialize navigate
+  const navigate = useNavigate();
 
   const handleCreateProjectClick = () => {
     navigate('/CreateProjectForm'); // Navigate to CreateProjectForm page

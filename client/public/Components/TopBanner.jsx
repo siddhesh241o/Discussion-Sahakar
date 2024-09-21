@@ -1,8 +1,10 @@
-import React from 'react'
-import gov_logo from '../Images/gov_logo.png'
-import { useNavigate } from 'react-router-dom'
+import React from 'react';
+import gov_logo from '../Images/gov_logo.png';
+import { useNavigate, useLocation } from 'react-router-dom';
+
 const TopBanner = () => {
-  const Navigate = useNavigate();
+  const navigate = useNavigate();
+  const location = useLocation();
 
   const HandleLogOut = () => {
     Navigate('/');
@@ -18,8 +20,9 @@ const TopBanner = () => {
     </div>
     <div className="notice-bar">
         Update: We are thrilled to announce the upcoming launch of our new Interdepartmental Collaboration Portal, designed to enhance collaboration across departments.
-    </div>
-  </>
-}
+      </div>
+    </>
+  );
+};
 
-export default TopBanner
+export default TopBanner;
