@@ -1,6 +1,7 @@
 import React from 'react';
 import { LineChart, Line, BarChart, Bar, PieChart, Pie, Cell, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from 'recharts';
 import { Bell, CreditCard, DollarSign, Home, PieChart as PieChartIcon, Settings, User } from 'lucide-react';
+import { useNavigate } from 'react-router-dom';
 
 const monthlyData = [
   { name: 'Jan', income: 4000, expense: 2400 },
@@ -28,24 +29,36 @@ const expenseData = [
 
 const COLORS = ['#0088FE', '#00C49F', '#FFBB28', '#FF8042', '#8884D8', '#82CA9D'];
 
-const Sidebar = () => (
-  <div className="w-64 bg-white h-screen p-4 hidden md:block">
-    <h2 className="text-2xl font-bold mb-8">MyWallet</h2>
-    <nav>
-      {[
-        { icon: <PieChartIcon size={20} />, label: 'Dashboard' },
-        { icon: <DollarSign size={20} />, label: 'Project Details' },
-        { icon: <Home size={20} />, label: 'Timeline' },
-        { icon: <User size={20} />, label: 'Reports' },
-      ].map((item, index) => (
-        <div key={index} className={`flex items-center space-x-2 p-2 rounded ${index === 0 ? 'bg-black text-white' : 'text-gray-600 hover:bg-gray-100'}`}>
-          {item.icon}
-          <span>{item.label}</span>
-        </div>
-      ))}
-    </nav>
-  </div>
-);
+const Sidebar = () => {
+    const navigate = useNavigate();
+  
+    const menuItems = [
+      { icon: <PieChartIcon size={20} />, label: 'Dashboard', path: '/' },
+      { icon: <DollarSign size={20} />, label: 'Project Details', path: '/ProjectDetails' },
+      { icon: <Home size={20} />, label: 'Timeline', path: '#' }, // Add a path if needed
+      { icon: <User size={20} />, label: 'Reports', path: '#' }, // Add a path if needed
+    ];
+  
+    return (
+      <div className="w-64 bg-white h-screen p-4 hidden md:block">
+        <h2 className="text-2xl font-bold mb-8">Project Dashboard</h2>
+        <nav>
+          {menuItems.map((item, index) => (
+            <div
+              key={index}
+              className={`flex items-center space-x-2 p-2 rounded ${
+                index === 0 ? 'bg-black text-white' : 'text-gray-600 hover:bg-gray-100'
+              }`}
+              onClick={() => navigate(item.path)}
+            >
+              {item.icon}
+              <span>{item.label}</span>
+            </div>
+          ))}
+        </nav>
+      </div>
+    );
+};
 
 const Header = () => (
   <header className="bg-white p-4 flex justify-between items-center">

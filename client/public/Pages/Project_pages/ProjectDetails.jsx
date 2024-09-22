@@ -1,171 +1,251 @@
 import React, { useState } from 'react';
-import { Clipboard, AlertCircle } from 'lucide-react';
-import { PieChart, Pie, Cell, BarChart, Bar, XAxis, YAxis, Tooltip } from 'recharts';
-import { BarChart2, GitBranch, MessageSquare, Bell, Calendar, Settings } from 'lucide-react';
-import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet';
-import 'leaflet/dist/leaflet.css';
-import Expense from './Expense';
+import { BarChart, Bar, XAxis, YAxis, Tooltip, ResponsiveContainer, PieChart, Pie, Cell } from 'recharts';
+import { Briefcase, CheckSquare, Users, Clock } from 'lucide-react';
+import Sidebar from './Sidebar';
 
-const ProjectDashboard = () => {
-  const [activeTab, setActiveTab] = useState('Dashboard');
+const ProjectDetails = () => {
+  const [timeRange, setTimeRange] = useState('Last 30 days');
 
-  const requestsData = [
-    { name: 'Mobile', value: 50 },
-    { name: 'Desktop', value: 30 },
-    { name: 'Tablet', value: 20 },
+  const summaryData = [
+    { name: 'Projects', value: 850, total: 1100, icon: Briefcase, color: '#10B981', change: 10 },
+    { name: 'Tasks', value: 100, total: 110, icon: CheckSquare, color: '#EF4444', change: -5 },
+    { name: 'Resources', value: 85, total: 90, icon: Users, color: '#3B82F6', change: 8 },
+    { name: 'Time Spent', value: 752, total: 885, icon: Clock, color: '#F59E0B', change: -3 },
   ];
 
-  const errorData = [
-    { name: 'XXX', value: 11 },
-    { name: 'YYY', value: 5 },
-    { name: 'ZZZ', value: 4 },
+  const projectData = [
+    { name: 'Parks and Recreation', status: 'Completed', progress: 100 },
+    { name: 'Public Works', status: 'On Track', progress: 60 },
+    { name: 'Environmental Protection', status: 'Delayed', progress: 30 },
+    { name: 'Budget Management', status: 'At Risk', progress: 20 },
   ];
 
-  const barChartData = [
-    { name: 'Funding', amount: 100000 },
-    { name: 'Budget', amount: 75000 },
-    { name: 'Timeline Milestones', amount: 10 },
-    { name: 'Stakeholder Engagement', amount: 5 },
-    { name: 'Risk Assessment', amount: 8 },
-    { name: 'Legal Compliance', amount: 6 },
+  const milestoneData = [
+    { name: 'Project Initiation', status: 'Completed', progress: 100 },
+    { name: 'Design Phase', status: 'On Track', progress: 80 },
+    { name: 'Construction Start', status: 'Delayed', progress: 50 },
+    { name: 'Environmental Impact Assessment', status: 'At Risk', progress: 40 },
   ];
 
-  const renderContent = () => {
-    switch (activeTab) {
-      case 'Expense':
-        return <Expense />;
-      case 'Alerts':
-        return (
-          <div className="p-6">
-            <h2 className="text-xl font-bold">Alerts</h2>
-            {/* Alert List */}
-          </div>
-        );
-      case 'Details':
-        return (
-          <div className="p-6">
-            <h2 className="text-xl font-bold">Project Details</h2>
-            <div className="mt-4 space-y-4">
-              <h3 className="font-semibold">Clear Objectives:</h3>
-              <p>Define specific goals and outcomes for the project to guide all departments.</p>
-              <h3 className="font-semibold">Roles and Responsibilities:</h3>
-              <p>Clearly outline each department's duties to avoid overlaps and ensure accountability.</p>
-              <h3 className="font-semibold">Funding and Budget:</h3>
-              <p>Establish a comprehensive budget, detailing funding sources and allocation for each department.</p>
-              <h3 className="font-semibold">Timeline with Milestones:</h3>
-              <p>Create a realistic timeline that includes key milestones to track progress effectively.</p>
-              <h3 className="font-semibold">Stakeholder Engagement:</h3>
-              <p>Identify and engage all relevant stakeholders to gather input and build support for the project.</p>
-              <h3 className="font-semibold">Risk Assessment:</h3>
-              <p>Conduct a thorough risk analysis to identify potential challenges and develop mitigation strategies.</p>
-              <h3 className="font-semibold">Communication Plan:</h3>
-              <p>Develop a robust communication strategy for both internal coordination and public updates.</p>
-              <h3 className="font-semibold">Monitoring and Evaluation Metrics:</h3>
-              <p>Set clear performance indicators to measure success and facilitate adjustments as needed.</p>
-              <h3 className="font-semibold">Legal Compliance:</h3>
-              <p>Ensure all aspects of the project adhere to relevant laws and regulations to avoid legal issues.</p>
-              <h3 className="font-semibold">Sustainability Strategy:</h3>
-              <p>Plan for the long-term impact and maintenance of the project after its completion to ensure continued benefits.</p>
-            </div>
-          </div>
-        );
-      case 'Dashboard':
-      default:
-        return (
-          <div className="p-6 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-            {/* Requests by Devices */}
-            <div className="bg-white p-4 rounded-lg shadow">
-              <h2 className="text-sm font-semibold mb-2 text-gray-500">REQUESTS BY DEVICES</h2>
-              <PieChart width={120} height={120}>
-                <Pie data={requestsData} dataKey="value" nameKey="name" cx="50%" cy="50%" outerRadius={50}>
-                  {requestsData.map((entry, index) => (
-                    <Cell key={`cell-${index}`} fill={['#FF6384', '#36A2EB', '#FFCE56'][index % 3]} />
-                  ))}
-                </Pie>
-              </PieChart>
-            </div>
-
-            {/* Error by Type */}
-            <div className="bg-white p-4 rounded-lg shadow">
-              <h2 className="text-sm font-semibold mb-2 text-gray-500">ERROR BY TYPE</h2>
-              <PieChart width={120} height={120}>
-                <Pie data={errorData} dataKey="value" nameKey="name" cx="50%" cy="50%" outerRadius={50}>
-                  {errorData.map((entry, index) => (
-                    <Cell key={`cell-${index}`} fill={['#FF6384', '#36A2EB', '#FFCE56'][index % 3]} />
-                  ))}
-                </Pie>
-              </PieChart>
-            </div>
-
-            {/* Bar Charts for Project Details */}
-            <div className="bg-white p-4 rounded-lg shadow col-span-1 md:col-span-2">
-              <h2 className="text-sm font-semibold mb-2 text-gray-500">PROJECT DETAILS</h2>
-              <BarChart width={500} height={300} data={barChartData}>
-                <XAxis dataKey="name" />
-                <YAxis />
-                <Tooltip />
-                <Bar dataKey="amount" fill="#8884d8" />
-              </BarChart>
-            </div>
-
-            {/* Latency by Location */}
-            <div className="bg-white p-4 rounded-lg shadow col-span-1 md:col-span-2">
-              <h2 className="text-sm font-semibold mb-2 text-gray-500">LATENCY BY LOCATION</h2>
-              <MapContainer center={[51.505, -0.09]} zoom={2} style={{ height: '300px', width: '100%' }}>
-                <TileLayer
-                  url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-                  attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-                />
-                <Marker position={[51.505, -0.09]}>
-                  <Popup>A sample popup!</Popup>
-                </Marker>
-              </MapContainer>
-            </div>
-          </div>
-        );
-    }
-  };
+  const overallProgress = 70;
+  const progressBreakdown = [
+    { name: 'Completed', value: 15, color: '#10B981' },
+    { name: 'In Progress', value: 5, color: '#3B82F6' },
+    { name: 'Delayed', value: 4, color: '#F59E0B' },
+  ];
 
   return (
-    <div className="flex h-screen bg-gray-100">
-      {/* Sidebar */}
-      <div className="w-16 bg-blue-600 flex flex-col items-center py-4 space-y-8">
-        <div className="w-10 h-10 bg-white rounded-full flex items-center justify-center text-blue-600 font-bold">G</div>
-        <BarChart2 className="text-white" />
-        <GitBranch className="text-white" />
-        <MessageSquare className="text-white" />
-        <Bell className="text-white" />
-        <Calendar className="text-white" />
-        <Settings className="text-white" />
-        <div className="mt-auto">
-          <img src="/api/placeholder/40/40" alt="User" className="w-10 h-10 rounded-full" />
-        </div>
-      </div>
-
-      {/* Main content */}
-      <div className="flex-1 overflow-y-auto">
-        <header className="bg-white shadow p-4">
-          <h1 className="text-2xl font-bold">Project</h1>
-          <nav className="mt-2">
-            <ul className="flex space-x-4 text-gray-500">
-              {['Dashboard', 'Timeline', 'Alerts', 'Details', 'Expense'].map((tab) => (
-                <li
-                  key={tab}
-                  className={`cursor-pointer ${activeTab === tab ? 'text-blue-600 border-b-2 border-blue-600' : ''}`}
-                  onClick={() => setActiveTab(tab)}
-                >
-                  {tab}
-                </li>
-              ))}
-            </ul>
-          </nav>
+    <div className="min-h-screen bg-gray-100 p-4">
+      <div className="max-w-7xl mx-auto">
+        <header className="flex justify-between items-center mb-6">
+          <h1 className="text-2xl font-bold">Dashboard</h1>
+          <select
+            value={timeRange}
+            onChange={(e) => setTimeRange(e.target.value)}
+            className="bg-white border border-gray-300 rounded-md px-3 py-2"
+          >
+            <option>Last 30 days</option>
+            <option>Last 60 days</option>
+            <option>Last 90 days</option>
+          </select>
         </header>
 
-        {/* Render content based on active tab */}
-        {renderContent()}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 mb-6">
+          {summaryData.map((item) => (
+            <div key={item.name} className="bg-white p-4 rounded-lg shadow">
+              <div className="flex items-center justify-between mb-2">
+                <span className="text-sm text-gray-500">{item.name}</span>
+                <item.icon className="text-gray-400" size={20} />
+              </div>
+              <div className="flex items-end">
+                <span className="text-2xl font-bold">{item.value}</span>
+                <span className="text-sm text-gray-500 ml-1">/ {item.total}</span>
+              </div>
+              <div className={`text-sm ${item.change > 0 ? 'text-green-500' : 'text-red-500'}`}>
+                {item.change > 0 ? '▲' : '▼'} {Math.abs(item.change)}% from last month
+              </div>
+            </div>
+          ))}
+        </div>
+
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-6">
+          <div className="bg-white p-4 rounded-lg shadow">
+            <h2 className="text-lg font-semibold mb-4">Project Summary</h2>
+            <div className="overflow-x-auto">
+              <table className="w-full">
+                <thead>
+                  <tr className="text-left text-sm text-gray-500">
+                    <th className="pb-2">Project Name</th>
+                    <th className="pb-2">Status</th>
+                    <th className="pb-2">Progress</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {projectData.map((project) => (
+                    <tr key={project.name} className="border-t">
+                      <td className="py-2">{project.name}</td>
+                      <td className="py-2">
+                        <span className={`px-2 py-1 rounded-full text-xs ${getStatusColor(project.status)}`}>
+                          {project.status}
+                        </span>
+                      </td>
+                      <td className="py-2">
+                        <div className="w-full bg-gray-200 rounded-full h-2.5">
+                          <div
+                            className="bg-blue-600 h-2.5 rounded-full"
+                            style={{ width: `${project.progress}%` }}
+                          ></div>
+                        </div>
+                      </td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+          <div className="bg-white p-4 rounded-lg shadow">
+            <h2 className="text-lg font-semibold mb-4">Overall Progress</h2>
+            <div className="flex items-center justify-between">
+              <PieChart width={160} height={160}>
+                <Pie
+                  data={progressBreakdown}
+                  cx={80}
+                  cy={80}
+                  innerRadius={60}
+                  outerRadius={80}
+                  paddingAngle={5}
+                  dataKey="value"
+                >
+                  {progressBreakdown.map((entry, index) => (
+                    <Cell key={`cell-${index}`} fill={entry.color} />
+                  ))}
+                </Pie>
+              </PieChart>
+              <div className="text-center">
+                <div className="text-4xl font-bold text-blue-600">{overallProgress}%</div>
+                <div className="text-sm text-gray-500">Completed</div>
+              </div>
+              <div>
+                {progressBreakdown.map((item) => (
+                  <div key={item.name} className="flex items-center mb-1">
+                    <div className="w-3 h-3 rounded-full mr-2" style={{ backgroundColor: item.color }}></div>
+                    <span className="text-sm">
+                      {item.value} {item.name}
+                    </span>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div className="bg-white p-4 rounded-lg shadow mb-6">
+          <h2 className="text-lg font-semibold mb-4">Milestone Progress</h2>
+          <div className="overflow-x-auto">
+            <table className="w-full">
+              <thead>
+                <tr className="text-left text-sm text-gray-500">
+                  <th className="pb-2">Milestone</th>
+                  <th className="pb-2">Status</th>
+                  <th className="pb-2">Progress</th>
+                </tr>
+              </thead>
+              <tbody>
+                {milestoneData.map((milestone) => (
+                  <tr key={milestone.name} className="border-t">
+                    <td className="py-2">{milestone.name}</td>
+                    <td className="py-2">
+                      <span className={`px-2 py-1 rounded-full text-xs ${getStatusColor(milestone.status)}`}>
+                        {milestone.status}
+                      </span>
+                    </td>
+                    <td className="py-2">
+                      <div className="w-full bg-gray-200 rounded-full h-2.5">
+                        <div
+                          className="bg-blue-600 h-2.5 rounded-full"
+                          style={{ width: `${milestone.progress}%` }}
+                        ></div>
+                      </div>
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <div className="bg-white p-4 rounded-lg shadow">
+          <h2 className="text-lg font-semibold mb-4">Project Details</h2>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div>
+              <h3 className="font-semibold mb-2">Objectives</h3>
+              <p>Increase urban green spaces by 30% in three years.</p>
+            </div>
+            <div>
+              <h3 className="font-semibold mb-2">Departments</h3>
+              <ul className="list-disc list-inside">
+                <li>Parks and Recreation: Design layouts</li>
+                <li>Public Works: Manage construction</li>
+                <li>Environmental Protection: Monitor compliance</li>
+              </ul>
+            </div>
+            <div>
+              <h3 className="font-semibold mb-2">Budget</h3>
+              <p>$5 million total; $3 million state grants, $2 million local taxes</p>
+            </div>
+            <div>
+              <h3 className="font-semibold mb-2">Timeline</h3>
+              <ul className="list-disc list-inside">
+                <li>Start: January 2025</li>
+                <li>First Green Space Opening: April 2026</li>
+                <li>Completion: December 2027</li>
+              </ul>
+            </div>
+            <div>
+              <h3 className="font-semibold mb-2">Stakeholders</h3>
+              <p>Local community groups, NGOs, city council</p>
+            </div>
+            <div>
+              <h3 className="font-semibold mb-2">Risks</h3>
+              <p>Budget overruns, community resistance, weather delays</p>
+            </div>
+            <div>
+              <h3 className="font-semibold mb-2">Communication</h3>
+              <p>Monthly meetings internally; quarterly public newsletters</p>
+            </div>
+            <div>
+              <h3 className="font-semibold mb-2">Metrics</h3>
+              <p>Number of green spaces created, community engagement, air quality improvement</p>
+            </div>
+            <div>
+              <h3 className="font-semibold mb-2">Legal Compliance</h3>
+              <p>Adherence to zoning and environmental regulations</p>
+            </div>
+            <div>
+              <h3 className="font-semibold mb-2">Sustainability</h3>
+              <p>Community gardens for maintenance; $100,000 annual upkeep budget</p>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   );
 };
 
-export default ProjectDashboard;
+const getStatusColor = (status) => {
+  switch (status) {
+    case 'Completed':
+      return 'bg-green-100 text-green-800';
+    case 'On Track':
+      return 'bg-blue-100 text-blue-800';
+    case 'Delayed':
+      return 'bg-yellow-100 text-yellow-800';
+    case 'At Risk':
+      return 'bg-red-100 text-red-800';
+    default:
+      return 'bg-gray-100 text-gray-800';
+  }
+};
+
+export default ProjectDetails;
