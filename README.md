@@ -6,7 +6,12 @@ This platform enhances interdepartmental cooperation among government agencies b
 **LOGIN**
 <img width="1147" alt="Screenshot 2024-09-23 at 6 13 31 PM" src="https://github.com/user-attachments/assets/64f5800e-1543-4da3-91bb-e78d7be082c8">
 #
+
+
+**DASHBOARD**
+#
 <img width="1147" alt="Screenshot 2024-09-23 at 6 13 43 PM" src="https://github.com/user-attachments/assets/c11dfaad-a3cc-4af1-bdc6-9870f67cc4b4">
+#
 <img width="1139" alt="Screenshot 2024-09-23 at 6 14 47 PM" src="https://github.com/user-attachments/assets/5570aeb3-20d8-460e-b837-8a1e5641402c">
 <img width="1147" alt="Screenshot 2024-09-23 at 6 14 56 PM" src="https://github.com/user-attachments/assets/4fc8912f-9cd8-40e7-976d-a253817b0f7f">
 <img width="870" alt="Screenshot 2024-09-23 at 6 15 19 PM" src="https://github.com/user-attachments/assets/72573e3f-a66c-428a-9b49-503e4ebd30ab">
