@@ -1,3 +1,8 @@
+SHAKAKAR-INTER DEPARTMENTAL CO-ORDINATION
+This platform enhances interdepartmental cooperation among government agencies by centralizing project management, resource sharing, and public engagement. Key features include GIS data sharing, real-time project tracking, and a task management system powered by a Linear Programming (LP) model for optimal resource allocation. Collaboration forums facilitate communication, while blockchain technology ensures secure data storage. A multilingual chatbot provides real-time support, and a public dashboard enables citizens to track projects and submit complaints. Designed for scalability, the platform aims to improve government efficiency, transparency, and decision-making across areas like urban planning, disaster management, public health, and environmental protection.
+
+
+
 <img width="1147" alt="Screenshot 2024-09-23 at 6 13 31 PM" src="https://github.com/user-attachments/assets/64f5800e-1543-4da3-91bb-e78d7be082c8">
 <img width="1147" alt="Screenshot 2024-09-23 at 6 13 43 PM" src="https://github.com/user-attachments/assets/c11dfaad-a3cc-4af1-bdc6-9870f67cc4b4">
 <img width="1139" alt="Screenshot 2024-09-23 at 6 14 47 PM" src="https://github.com/user-attachments/assets/5570aeb3-20d8-460e-b837-8a1e5641402c">
