@@ -59,7 +59,14 @@ const Login = () => {
           </div>
           <div className="mt-6 text-center">
             <p className="text-sm text-gray-600">
-              Don't have an account yet? <a href="#" className="text-blue-600">Create Account</a>
+              Don't have an account yet?{' '}
+              <a
+                href="#"
+                onClick={() => navigate('/Register')}  // Updated to navigate to Register
+                className="text-blue-600"
+              >
+                Create Account
+              </a>
             </p>
           </div>
         </div>
