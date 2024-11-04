@@ -12,7 +12,7 @@ const Login = () => {
 
   return (
     <div className="min-h-screen flex items-start justify-center py-8">
-      <div className="w-full max-w-4xl bg-white rounded-lg shadow-lg overflow-hidden flex border-4 border-blue-600"> {/* Added border class */}
+      <div className="w-full max-w-4xl bg-white rounded-lg shadow-lg overflow-hidden flex border-2 border-blue-600"> {/* Added border class */}
         {/* Left side of the card with the image */}
         <div className="w-1/2 p-0">
           <img
