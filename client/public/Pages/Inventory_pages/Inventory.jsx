@@ -5,50 +5,59 @@ const Inventory = () => {
   const navigate = useNavigate();
 
   return (
-    <div className="container mx-auto p-6 h-screen">
-      <h1 className="text-4xl font-bold text-center mb-12 text-blue-700">INVENTORY</h1>
+    <div className="container mx-auto p-6 h-screen flex flex-col">
+      
+      {/* Inventory Header */}
+      <div className="flex justify-center items-center mb-4">
+        <h1 className="text-4xl font-bold text-black-700">INVENTORY</h1>
+      </div>
 
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 h-full">
+      {/* Card Container */}
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-16 flex-grow h-full">
+        
         {/* My Inventory Card */}
-        <div
-          className="bg-gradient-to-r from-blue-500 to-blue-700 rounded-lg shadow-lg flex flex-col justify-center items-center p-6"
-          style={{ height: '30vh' }}
+        <div 
+          className="relative w-full cursor-pointer rounded-2xl shadow-[0_4px_6px_rgba(0,0,0,0.3)] transform transition duration-300 hover:scale-105 overflow-hidden" 
+          style={{ border: '1px solid black', borderRadius: '20px', height: '50vh' }}
+          onClick={() => navigate('/MyInventory')}
         >
-          <h2 className="text-2xl font-semibold text-white mb-6">My Inventory</h2>
-          <button
-            onClick={() => navigate('/MyInventory')}
-            className="bg-white text-blue-700 py-3 px-8 rounded-lg font-medium hover:bg-gray-100"
-          >
-            ENTER
-          </button>
+          <div 
+            className="w-full h-[85%] bg-cover bg-center" 
+            style={{ backgroundImage: "url('/Images/inv1.png')" }}
+          ></div>
+          <div className="absolute bottom-0 w-full h-[15%] bg-gray-800 bg-opacity-80 hover:bg-opacity-100 transition-all duration-300 ease-in-out flex items-center justify-center text-white font-bold text-lg">
+            My Inventory
+          </div>
         </div>
 
         {/* Request For Resources Card */}
-        <div
-          className="bg-gradient-to-r from-blue-500 to-blue-700 rounded-lg shadow-lg flex flex-col justify-center items-center p-6"
-          style={{ height: '30vh' }}
+        <div 
+          className="relative w-full cursor-pointer rounded-2xl shadow-[0_4px_6px_rgba(0,0,0,0.3)] transform transition duration-300 hover:scale-105 overflow-hidden" 
+          style={{ border: '1px solid black', borderRadius: '20px', height: '50vh' }}
+          onClick={() => navigate('/Out_req')}
         >
-          <h2 className="text-2xl font-semibold text-white mb-6">Request For Resources</h2>
-          <button
-            onClick={() => navigate('/Out_req')}
-            className="bg-white text-blue-700 py-3 px-8 rounded-lg font-medium hover:bg-gray-100"
-          >
-            ENTER
-          </button>
+          <div 
+            className="w-full h-[85%] bg-cover bg-center" 
+            style={{ backgroundImage: "url('/Images/inv2.png')" }}
+          ></div>
+          <div className="absolute bottom-0 w-full h-[15%] bg-gray-800 bg-opacity-80 hover:bg-opacity-100 transition-all duration-300 ease-in-out flex items-center justify-center text-white font-bold text-lg">
+            Request For Resources
+          </div>
         </div>
 
         {/* Received Requests Card */}
-        <div
-          className="bg-gradient-to-r from-blue-500 to-blue-700 rounded-lg shadow-lg flex flex-col justify-center items-center p-6"
-          style={{ height: '30vh' }}
+        <div 
+          className="relative w-full cursor-pointer rounded-2xl shadow-[0_4px_6px_rgba(0,0,0,0.3)] transform transition duration-300 hover:scale-105 overflow-hidden" 
+          style={{ border: '1px solid black', borderRadius: '20px', height: '50vh' }}
+          onClick={() => navigate('/Inc_req')}
         >
-          <h2 className="text-2xl font-semibold text-white mb-6">Received Requests</h2>
-          <button
-            onClick={() => navigate('/Inc_req')}
-            className="bg-white text-blue-700 py-3 px-8 rounded-lg font-medium hover:bg-gray-100"
-          >
-            ENTER
-          </button>
+          <div 
+            className="w-full h-[85%] bg-cover bg-center" 
+            style={{ backgroundImage: "url('/Images/inv3.png')" }}
+          ></div>
+          <div className="absolute bottom-0 w-full h-[15%] bg-gray-800 bg-opacity-80 hover:bg-opacity-100 transition-all duration-300 ease-in-out flex items-center justify-center text-white font-bold text-lg">
+            Received Requests
+          </div>
         </div>
       </div>
     </div>
