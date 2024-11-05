@@ -25,6 +25,8 @@ import TopBanner from '../public/Components/TopBanner.jsx';
 import Discussion from '../public/Pages/Discussion.jsx';
 import CreateTask from '../public/Pages/Task_pages/CreateTask.jsx';
 import Expense from '../public/Pages/Project_pages/Expense.jsx';
+import Staff from '../public/Pages/Staff.jsx';  // Corrected import path
+
 import '../src/App.css';
 
 const App = () => {
@@ -34,7 +36,7 @@ const App = () => {
         <TopBanner />
         <Routes>
           <Route path="/" element={<Login />} />
-          <Route path="/Register" element={<Register />} /> {/* Updated path */}
+          <Route path="/Register" element={<Register />} /> 
           <Route path="/Dashboard" element={<Dashboard />} />
           <Route path="/Inventory" element={<Inventory />} />
           <Route path="/Meeting" element={<Meeting />} />
@@ -57,6 +59,7 @@ const App = () => {
           <Route path="/Inc_req" element={<Inc_req />} />
           <Route path="/Out_req" element={<Out_req />} />
           <Route path="/Discussion" element={<Discussion />} />
+          <Route path="/Staff" element={<Staff />} />
         </Routes>
       </BrowserRouter>
     </>
