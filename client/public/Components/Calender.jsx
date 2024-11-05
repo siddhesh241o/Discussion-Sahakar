@@ -1,46 +1,27 @@
 import React, { useState } from 'react';
-import Modal from './Modal'; // Assuming Modal component is imported
 
 const Calendar = () => {
-  const initialMeetings = {
-    "2024-09-16": [{ time: "10:00 AM", title: "Meeting with the department manager" }],
-    "2024-09-17": [{ time: "1:00 PM", title: "Project Review" }],
-    "2024-09-19": [{ time: "9:00 AM", title: "Preparation for the project" }],
-    "2024-10-05": [{ time: "11:00 AM", title: "Bla bla bla ..." }],
-    "2024-10-12": [{ time: "3:00 PM", title: "Deciding the next steps" }],
-    "2024-11-02": [{ time: "10:00 AM", title: "Client Presentation" }],
-  };
+  const [meetings, setMeetings] = useState({
+    "2024-09-16": [{ time: "10:00 AM", title: "Department Meeting", description: "Meeting with the department manager." }],
+    "2024-09-17": [{ time: "1:00 PM", title: "Project Review", description: "Review of project progress." }],
+    "2024-09-19": [{ time: "9:00 AM", title: "Preparation", description: "Preparation for upcoming project phases." }],
+  });
 
-  const [meetings, setMeetings] = useState(initialMeetings);
   const [currentMonth, setCurrentMonth] = useState(new Date());
-  const [modalOpen, setModalOpen] = useState(false);
-  const [modalContent, setModalContent] = useState({ title: '', content: '' });
-  const [newTask, setNewTask] = useState({ time: '', title: '', details: '' });
-  const [selectedDate, setSelectedDate] = useState('');
-  const today = new Date();
+  const [selectedDate, setSelectedDate] = useState(null); // Track selected date for modal
+  const [newMeeting, setNewMeeting] = useState({ title: '', description: '' });
+  const [timeSelection, setTimeSelection] = useState({ hour: '', minute: '', period: 'AM' });
+  const [isModalOpen, setIsModalOpen] = useState(false); // Track modal state
 
   const startOfMonth = new Date(currentMonth.getFullYear(), currentMonth.getMonth(), 1);
   const endOfMonth = new Date(currentMonth.getFullYear(), currentMonth.getMonth() + 1, 0);
-
   const months = Array.from({ length: 12 }, (_, i) => new Date(0, i).toLocaleString('default', { month: 'long' }));
-  const years = Array.from({ length: 111 }, (_, i) => 1990 + i); // Year range from 1990 to 2100
-
-  // Generate time options for every 15 minutes in 12-hour format with AM/PM
-  const timeOptions = [];
-  for (let i = 0; i < 24; i++) {
-    const hour = i % 12 === 0 ? 12 : i % 12;
-    const period = i < 12 ? 'AM' : 'PM';
-    for (let j = 0; j < 60; j += 15) {
-      const minute = j.toString().padStart(2, '0');
-      timeOptions.push(`${hour}:${minute} ${period}`);
-    }
-  }
+  const years = Array.from({ length: 111 }, (_, i) => 1990 + i);
 
   const generateDays = () => {
     let days = [];
     for (let i = 1; i <= endOfMonth.getDate(); i++) {
-      let dateStr = `${currentMonth.getFullYear()}-${(currentMonth.getMonth() + 1)
-        .toString().padStart(2, '0')}-${i.toString().padStart(2, '0')}`;
+      const dateStr = `${currentMonth.getFullYear()}-${(currentMonth.getMonth() + 1).toString().padStart(2, '0')}-${i.toString().padStart(2, '0')}`;
       days.push({
         date: dateStr,
         meetings: meetings[dateStr] || [],
@@ -49,86 +30,25 @@ const Calendar = () => {
     return days;
   };
 
-  const handleMonthChange = (e) => {
-    setCurrentMonth(new Date(currentMonth.getFullYear(), e.target.value, 1));
-  };
-
-  const handleYearChange = (e) => {
-    setCurrentMonth(new Date(e.target.value, currentMonth.getMonth(), 1));
-  };
-
-  const prevMonth = () => {
-    setCurrentMonth(new Date(currentMonth.getFullYear(), currentMonth.getMonth() - 1));
-  };
-
-  const nextMonth = () => {
-    setCurrentMonth(new Date(currentMonth.getFullYear(), currentMonth.getMonth() + 1));
-  };
-
-  const handleCellClick = (date) => {
+  const openModal = (date) => {
     setSelectedDate(date);
-    setModalContent({ title: `Add Task on ${date}`, content: renderTaskForm() });
-    setModalOpen(true);
+    setIsModalOpen(true);
+    setNewMeeting({ title: '', description: '' });
+    setTimeSelection({ hour: '', minute: '', period: 'AM' });
   };
 
-  const renderTaskForm = () => (
-    <form onSubmit={handleAddTask}>
-      <label className="block mb-1 text-sm font-semibold">Time</label>
-      <select
-        value={newTask.time}
-        onChange={(e) => setNewTask({ ...newTask, time: e.target.value })}
-        className="border p-2 mb-2 w-full rounded"
-        required
-      >
-        <option value="">Select Time</option>
-        {timeOptions.map((time, index) => (
-          <option key={index} value={time}>
-            {time}
-          </option>
-        ))}
-      </select>
-
-      <label className="block mb-1 text-sm font-semibold">Task Title</label>
-      <input
-        type="text"
-        value={newTask.title}
-        onChange={(e) => setNewTask({ ...newTask, title: e.target.value })}
-        className="border p-2 mb-2 w-full rounded"
-        placeholder="Enter task title"
-        required
-      />
-
-      <label className="block mb-1 text-sm font-semibold">Task Details</label>
-      <textarea
-        value={newTask.details}
-        onChange={(e) => setNewTask({ ...newTask, details: e.target.value })}
-        className="border p-2 mb-2 w-full rounded"
-        placeholder="Enter task details"
-        rows="3"
-        required
-      />
-      
-      <button type="submit" className="bg-blue-500 text-white px-3 py-1 rounded w-full">
-        Add Task
-      </button>
-    </form>
-  );
-
-  const handleAddTask = (e) => {
-    e.preventDefault();
-    if (!selectedDate) return;
-
-    setMeetings((prevMeetings) => {
-      const updatedMeetings = { ...prevMeetings };
-      if (!updatedMeetings[selectedDate]) {
-        updatedMeetings[selectedDate] = [];
-      }
-      updatedMeetings[selectedDate].push(newTask);
-      return updatedMeetings;
-    });
-
-    setNewTask({ time: '', title: '', details: '' });
-    setModalOpen(false);
+  const handleSaveMeeting = () => {
+    if (newMeeting.title && timeSelection.hour && timeSelection.minute && newMeeting.description) {
+      const formattedTime = `${timeSelection.hour}:${timeSelection.minute} ${timeSelection.period}`;
+      setMeetings((prevMeetings) => ({
+        ...prevMeetings,
+        [selectedDate]: [
+          ...(prevMeetings[selectedDate] || []),
+          { time: formattedTime, title: newMeeting.title, description: newMeeting.description }
+        ],
+      }));
+      setIsModalOpen(false); // Close modal after saving
+    }
   };
 
   const renderDays = () => {
@@ -136,54 +56,39 @@ const Calendar = () => {
     const startDayOfWeek = startOfMonth.getDay();
     let days = [];
 
-    // Fill in days from the previous month
     for (let i = startDayOfWeek - 1; i >= 0; i--) {
       days.push(
-        <div key={`prev-${i}`} className="border p-2 h-20 flex items-center justify-center relative text-gray-400">
-          <div className="absolute top-0 right-0 p-1 text-xs rounded-full">
-            {daysInPrevMonth - i}
-          </div>
+        <div key={`prev-${i}`} className="border p-2 h-20 flex items-center justify-center text-gray-400 rounded-2xl">
+          {daysInPrevMonth - i}
         </div>
       );
     }
 
-    // Fill in days of the current month
     generateDays().forEach((day, index) => {
       const dayDate = new Date(day.date);
-      const isPast = dayDate < today;
       const hasMeetings = day.meetings.length > 0;
 
       days.push(
         <div
           key={index}
-          className={`border p-2 relative h-20 flex flex-col justify-between cursor-pointer overflow-hidden ${hasMeetings ? (isPast ? 'bg-green-300' : 'bg-orange-300') : 'bg-transparent'}`}
-          onClick={() => handleCellClick(day.date)}
+          className={`border p-2 h-20 flex flex-col justify-between cursor-pointer rounded-2xl ${hasMeetings ? 'bg-orange-300' : 'bg-transparent'}`}
+          onClick={() => openModal(day.date)}
         >
-          <div className="absolute top-0 right-0 p-1 text-xs">
-            {new Date(day.date).getDate()}
-          </div>
-          {hasMeetings && (
-            <>
-              <div className={`p-1 text-xs truncate ${isPast ? 'bg-green-300 text-white' : 'bg-orange-300 text-white'} flex-1`}>
-                {day.meetings[0].title}
-              </div>
-              {isPast && hasMeetings && (
-                <span className="text-xs font-semibold text-green-700 mt-1">Done</span>
-              )}
-            </>
-          )}
+          <div className="text-sm font-bold">{dayDate.getDate()}</div>
+          {day.meetings.map((meeting, i) => (
+            <div key={i} className="text-xs mt-1 bg-gray-200 rounded p-1">
+              {meeting.time} - {meeting.title}
+            </div>
+          ))}
         </div>
       );
     });
 
-    // Fill in days from the next month
     const daysInNextMonth = 42 - days.length;
     for (let i = 1; i <= daysInNextMonth; i++) {
       days.push(
-        <div key={`next-${i}`} className="border p-2 h-20 flex items-center justify-center relative text-gray-400">
-          <div className="absolute top-0 right-0 p-1 text-xs rounded-full">
-            {i}
-          </div>
+        <div key={`next-${i}`} className="border p-2 h-20 flex items-center justify-center text-gray-400 rounded-2xl">
+          {i}
         </div>
       );
     }
@@ -192,33 +97,20 @@ const Calendar = () => {
   };
 
   return (
-    <div className="flex p-4 space-x-4">
+    <div className="p-4 flex space-x-4">
       {/* Calendar Side */}
-      <div className="w-1/2 border p-4 rounded shadow">
-        <div className="flex justify-between items-center mb-4 space-x-2">
-          <button onClick={prevMonth} className="bg-blue-500 text-white px-3 py-1 rounded">
+      <div className="w-1/2 border p-4 rounded-2xl shadow">
+        <div className="flex justify-between items-center mb-4">
+          <button onClick={() => setCurrentMonth(new Date(currentMonth.getFullYear(), currentMonth.getMonth() - 1))} className="bg-blue-500 text-white px-3 py-1 rounded-2xl">
             Previous
           </button>
-
-          {/* Month Selector */}
-          <select value={currentMonth.getMonth()} onChange={handleMonthChange} className="border p-2 rounded">
-            {months.map((month, index) => (
-              <option key={index} value={index}>
-                {month}
-              </option>
-            ))}
+          <select value={currentMonth.getMonth()} onChange={(e) => setCurrentMonth(new Date(currentMonth.getFullYear(), e.target.value, 1))} className="border p-2 rounded-2xl">
+            {months.map((month, index) => <option key={index} value={index}>{month}</option>)}
           </select>
-
-          {/* Year Selector */}
-          <select value={currentMonth.getFullYear()} onChange={handleYearChange} className="border p-2 rounded">
-            {years.map((year) => (
-              <option key={year} value={year}>
-                {year}
-              </option>
-            ))}
+          <select value={currentMonth.getFullYear()} onChange={(e) => setCurrentMonth(new Date(e.target.value, currentMonth.getMonth(), 1))} className="border p-2 rounded-2xl">
+            {years.map((year) => <option key={year} value={year}>{year}</option>)}
           </select>
-
-          <button onClick={nextMonth} className="bg-blue-500 text-white px-3 py-1 rounded">
+          <button onClick={() => setCurrentMonth(new Date(currentMonth.getFullYear(), currentMonth.getMonth() + 1))} className="bg-blue-500 text-white px-3 py-1 rounded-2xl">
             Next
           </button>
         </div>
@@ -231,8 +123,8 @@ const Calendar = () => {
         </div>
       </div>
 
-      {/* Task List Side */}
-      <div className="w-1/2 border p-4 rounded shadow">
+      {/* Scheduled Meetings Side */}
+      <div className="w-1/2 border p-4 rounded-2xl shadow">
         <h2 className="text-lg font-bold mb-4">Scheduled Meetings</h2>
         <div>
           {Object.keys(meetings).map((date, index) => (
@@ -242,7 +134,7 @@ const Calendar = () => {
                 <div key={idx} className="text-xs p-1 bg-gray-200 rounded mt-1">
                   <span className="block font-bold">{meeting.time}</span>
                   <span>{meeting.title}</span>
-                  <p className="text-xs">{meeting.details}</p>
+                  <p>{meeting.description}</p>
                 </div>
               ))}
             </div>
@@ -250,13 +142,63 @@ const Calendar = () => {
         </div>
       </div>
 
-      {/* Modal */}
-      <Modal
-        isOpen={modalOpen}
-        onClose={() => setModalOpen(false)}
-        title={modalContent.title}
-        content={modalContent.content}
-      />
+      {/* Modal for Adding New Meeting */}
+      {isModalOpen && (
+        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center">
+          <div className="bg-white p-6 rounded-2xl w-80">
+            <h2 className="text-lg font-bold mb-2">Add Meeting on {selectedDate}</h2>
+            <input
+              type="text"
+              placeholder="Meeting Title"
+              value={newMeeting.title}
+              onChange={(e) => setNewMeeting({ ...newMeeting, title: e.target.value })}
+              className="border p-2 rounded w-full mb-2"
+            />
+            <textarea
+              placeholder="Meeting Description"
+              value={newMeeting.description}
+              onChange={(e) => setNewMeeting({ ...newMeeting, description: e.target.value })}
+              className="border p-2 rounded w-full mb-2"
+            />
+            <div className="flex space-x-2 mb-2">
+              <select
+                value={timeSelection.hour}
+                onChange={(e) => setTimeSelection({ ...timeSelection, hour: e.target.value })}
+                className="border p-1 rounded w-1/3"
+              >
+                <option value="">Hour</option>
+                {Array.from({ length: 12 }, (_, i) => (i + 1).toString().padStart(2, '0')).map((h) => (
+                  <option key={h} value={h}>{h}</option>
+                ))}
+              </select>
+              <select
+                value={timeSelection.minute}
+                onChange={(e) => setTimeSelection({ ...timeSelection, minute: e.target.value })}
+                className="border p-1 rounded w-1/3"
+              >
+                <option value="">Minute</option>
+                {Array.from({ length: 60 }, (_, i) => i.toString().padStart(2, '0')).map((m) => (
+                  <option key={m} value={m}>{m}</option>
+                ))}
+              </select>
+              <select
+                value={timeSelection.period}
+                onChange={(e) => setTimeSelection({ ...timeSelection, period: e.target.value })}
+                className="border p-1 rounded w-1/3"
+              >
+                <option value="AM">AM</option>
+                <option value="PM">PM</option>
+              </select>
+            </div>
+            <button onClick={handleSaveMeeting} className="bg-blue-500 text-white px-3 py-1 rounded w-full mb-2">
+              Save Meeting
+            </button>
+            <button onClick={() => setIsModalOpen(false)} className="text-gray-500 text-sm underline w-full text-center">
+              Cancel
+            </button>
+          </div>
+        </div>
+      )}
     </div>
   );
 };
