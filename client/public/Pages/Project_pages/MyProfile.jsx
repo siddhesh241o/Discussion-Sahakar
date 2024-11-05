@@ -1,43 +1,18 @@
 import React from 'react';
 import { LineChart, Line, BarChart, Bar, XAxis, YAxis, ResponsiveContainer } from 'recharts';
-import { Bell, MessageSquare, Calendar, Plus, ChevronRight } from 'lucide-react';
-
-const Sidebar = () => (
-  <div className="w-64 bg-white p-4 flex flex-col h-screen">
-    <div className="mb-8">
-      <h2 className="text-xl font-bold">Mr. Ratan Tata</h2>
-      <p className="text-sm text-gray-500">Project Management Admin</p>
-    </div>
-    <nav className="flex-grow">
-      <ul className="space-y-2">
-        {['Dashboard', 'Project', 'Clients', 'Board', 'Analytics', 'Calendar', 'Message'].map((item) => (
-          <li key={item} className={`p-2 rounded ${item === 'Analytics' ? 'bg-indigo-100 text-indigo-600' : ''}`}>
-            {item}
-          </li>
-        ))}
-      </ul>
-    </nav>
-    <div className="mt-auto bg-indigo-600 rounded-lg p-4 text-white">
-      <div className="flex items-center mb-2">
-        <div className="w-10 h-10 bg-gray-300 rounded-full mr-2"></div>
-        <div>
-          <p className="font-bold">Randy Riley</p>
-          <p className="text-sm">Try Premium <ChevronRight size={16} className="inline" /></p>
-        </div>
-      </div>
-    </div>
-  </div>
-);
+import { Bell, MessageSquare, Calendar, Plus } from 'lucide-react';
 
 const Header = () => (
   <div className="flex flex-col md:flex-row justify-between items-center mb-6">
-    <h1 className="text-2xl font-bold mb-4 md:mb-0">Analytics</h1>
+    <div className="mb-4 md:mb-0">
+      <h1 className="text-2xl font-bold mt-2">Profile Analytics</h1>
+    </div>
     <div className="flex items-center space-x-4">
       <input type="text" placeholder="Search" className="border rounded-full px-4 py-2" />
       <select className="border rounded-full px-4 py-2">
         <option>EN</option>
       </select>
-      <div className="w-10 h-10 bg-gray-300 rounded-full"></div>
+      
     </div>
   </div>
 );
@@ -58,7 +33,7 @@ const NotificationBar = () => (
     </div>
     <button className="bg-indigo-600 text-white py-2 px-4 rounded-full flex items-center">
       <Plus size={20} className="mr-2" />
-      Create New Project
+      Create Progress Report
     </button>
   </div>
 );
@@ -104,11 +79,21 @@ const StatCard = ({ title, value, change, icon }) => (
 );
 
 const ManageProjectCard = () => (
-  <div className="bg-indigo-600 text-white p-6 rounded-lg shadow mb-6">
-    <h3 className="text-xl font-semibold mb-2">Manage your project in one touch</h3>
-    <p className="mb-4">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-    <button className="bg-white text-indigo-600 px-4 py-2 rounded-full">
-      Try For Free Now
+  <div className="bg-indigo-600 text-white p-6 rounded-lg shadow mb-4">
+    <div className="flex flex-col items-center">
+      {/* Circular Image */}
+      <img src="./public/images/profile.png" alt="Profile" className="w-24 h-24 rounded-full mb-4" />
+      
+      {/* User Information */}
+      <h3 className="text-xl font-semibold p-2">Prasad Ajay Mahankal</h3>
+      <p className="text-sm p-1">Project Management Admin</p>
+      <p className="text-sm p-1">Roads & Transport Department</p>
+      <p className="text-sm p-1">prasad.mahankal22@pccoepune.org</p>
+    </div>
+    
+    {/* Button */}
+    <button className="bg-white text-indigo-600 px-4 py-2 rounded-full w-full mt-4">
+      Edit Profile
     </button>
   </div>
 );
@@ -128,8 +113,7 @@ const WorkloadDashboard = () => (
             <p className="text-xs">On Progress</p>
           </div>
         </div>
-        <div className="w-full h-full border-8 border-indigo-600 rounded-full">
-        </div>
+        <div className="w-full h-full border-8 border-indigo-600 rounded-full"></div>
       </div>
     </div>
     <p className="text-sm font-semibold">For CMS Website</p>
@@ -160,7 +144,6 @@ const DailyTasks = () => (
 const ProjectManagerDashboard = () => {
   return (
     <div className="flex flex-col md:flex-row bg-gray-100 min-h-screen">
-      <Sidebar />
       <div className="flex-grow p-4 md:p-8 overflow-y-auto">
         <Header />
         <NotificationBar />
@@ -168,9 +151,9 @@ const ProjectManagerDashboard = () => {
           <div className="lg:col-span-2">
             <ProjectStatistics />
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 mb-6">
-              <StatCard title="Total Clients" value="78" change={5.6} icon={<div className="w-12 h-12 bg-indigo-100 rounded-full"></div>} />
-              <StatCard title="Total Task Done" value="34" change={-2.5} icon={<div className="w-12 h-12 bg-green-100 rounded-full"></div>} />
-              <StatCard title="Total Clients" value="565" change={-3.5} icon={<div className="w-12 h-12 bg-yellow-100 rounded-full"></div>} />
+              <StatCard title="Total Tasks assigned" value="78" change={5.6} icon={<div className="w-12 h-12 bg-indigo-100 rounded-full"></div>} />
+              <StatCard title="Total Tasks Done" value="34" change={-2.5} icon={<div className="w-12 h-12 bg-green-100 rounded-full"></div>} />
+              <StatCard title="Total Pending Tasks" value="565" change={-3.5} icon={<div className="w-12 h-12 bg-yellow-100 rounded-full"></div>} />
               <StatCard title="New Projects" value="565" change={5.6} icon={<div className="w-12 h-12 bg-red-100 rounded-full"></div>} />
             </div>
             <div className="bg-white p-4 rounded-lg shadow mb-6">

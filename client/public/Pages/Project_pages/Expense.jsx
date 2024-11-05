@@ -1,7 +1,7 @@
 import React from 'react';
-import { LineChart, Line, BarChart, Bar, PieChart, Pie, Cell, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from 'recharts';
-import { Bell, CreditCard, DollarSign, Home, PieChart as PieChartIcon, Settings, User } from 'lucide-react';
-import { useNavigate } from 'react-router-dom';
+import { LineChart, Line, PieChart, Pie, Cell, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from 'recharts';
+import { Bell } from 'lucide-react';
+import Navbar from './Navbar';
 
 const monthlyData = [
   { name: 'Jan', income: 4000, expense: 2400 },
@@ -29,43 +29,11 @@ const expenseData = [
 
 const COLORS = ['#0088FE', '#00C49F', '#FFBB28', '#FF8042', '#8884D8', '#82CA9D'];
 
-const Sidebar = () => {
-    const navigate = useNavigate();
-  
-    const menuItems = [
-      { icon: <PieChartIcon size={20} />, label: 'Dashboard', path: '/' },
-      { icon: <DollarSign size={20} />, label: 'Project Details', path: '/ProjectDetails' },
-      { icon: <Home size={20} />, label: 'Timeline', path: '#' }, // Add a path if needed
-      { icon: <User size={20} />, label: 'Reports', path: '#' }, // Add a path if needed
-    ];
-  
-    return (
-      <div className="w-64 bg-white h-screen p-4 hidden md:block">
-        <h2 className="text-2xl font-bold mb-8">Project Dashboard</h2>
-        <nav>
-          {menuItems.map((item, index) => (
-            <div
-              key={index}
-              className={`flex items-center space-x-2 p-2 rounded ${
-                index === 0 ? 'bg-black text-white' : 'text-gray-600 hover:bg-gray-100'
-              }`}
-              onClick={() => navigate(item.path)}
-            >
-              {item.icon}
-              <span>{item.label}</span>
-            </div>
-          ))}
-        </nav>
-      </div>
-    );
-};
-
 const Header = () => (
   <header className="bg-white p-4 flex justify-between items-center">
     <h1 className="text-xl font-semibold">Dashboard</h1>
     <div className="flex items-center space-x-4">
       <Bell size={20} />
-      <img src="/api/placeholder/32/32" alt="User" className="w-8 h-8 rounded-full" />
     </div>
   </header>
 );
@@ -89,8 +57,9 @@ const StatCard = ({ label, value, change, color }) => (
 
 const Expense = () => {
   return (
-    <div className="flex bg-gray-100 min-h-screen">
-      <Sidebar />
+    <div className="flex flex-col bg-gray-100 min-h-screen">
+      <Navbar></Navbar>
+      <div  className="flex flex-row bg-gray-100 min-h-screen">
       <div className="flex-1 overflow-hidden">
         <Header />
         <main className="p-6 overflow-y-auto" style={{height: 'calc(100vh - 64px)'}}>
@@ -267,6 +236,7 @@ const Expense = () => {
             </div>
           ))}
         </div>
+      </div>
       </div>
     </div>
   );
