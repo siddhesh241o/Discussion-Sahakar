@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import jsPDF from 'jspdf';
 
 const departments = {
   water: {
@@ -10,14 +11,13 @@ const departments = {
 
 Dear [Recipient],
 
-This memorandum serves as a notification regarding [Policy/Procedure]. 
-Please be advised that the following changes will take effect immediately:
+This memorandum serves as a notification regarding [Policy/Procedure]. Please be advised that the following changes will take effect immediately.
 
 1. [Change 1]
 2. [Change 2]
 3. [Change 3]
 
-For any further clarification, contact [Department Name].
+We request all concerned individuals to take note of these changes and act accordingly. For any further clarification, please contact [Department Name].
 
 Sincerely,
 [Your Name]
@@ -31,12 +31,14 @@ Sincerely,
     
 Subject: [Subject of the Office Order]
 
+Dear [Recipient],
+
 The following orders are issued with immediate effect:
 
 1. [Order Details]
 2. [Order Details]
 
-All concerned are directed to comply with the above instructions.
+All concerned are directed to comply with the above instructions without delay. Please ensure that these orders are followed meticulously to maintain the safety and integrity of operations.
 
 By Order,
 [Your Name]
@@ -54,14 +56,12 @@ Subject: Demand for Grant for [Purpose]
 
 Dear Sir/Madam,
 
-In accordance with the financial rules, 
-I am requesting a grant of [Amount] for the purpose of [Purpose]. 
-The details of the required funds are outlined as follows:
+In accordance with the financial rules, I am requesting a grant of [Amount] for the purpose of [Purpose]. The details of the required funds are outlined as follows:
 
 1. [Itemized Cost 1]
 2. [Itemized Cost 2]
 
-Please consider this request at the earliest.
+It is kindly requested that this application be given priority consideration so that we can ensure timely execution of the intended project.
 
 Sincerely,
 [Your Name]
@@ -75,13 +75,14 @@ Sincerely,
 
 Subject: [Subject of the Notice]
 
-This is to inform all concerned that [Notice Details]. 
-The following actions are required to be completed by [Deadline]:
+Dear [Recipient],
+
+This is to inform all concerned that [Notice Details]. The following actions are required to be completed by [Deadline]:
 
 1. [Action Item 1]
 2. [Action Item 2]
 
-For further information, please contact [Contact Information].
+For further information or clarification, please contact [Contact Information]. We appreciate your prompt attention to this matter.
 
 Issued by,
 [Your Name]
@@ -95,13 +96,14 @@ Issued by,
 
 Subject: [Subject of the Circular]
 
-It is hereby informed that [Details of the Information]. 
-The relevant guidelines and instructions are as follows:
+Dear [Recipient],
+
+It is hereby informed that [Details of the Information]. The relevant guidelines and instructions are as follows:
 
 1. [Instruction 1]
 2. [Instruction 2]
 
-Please ensure compliance with the above.
+Please ensure compliance with the above guidelines. If you have any questions, feel free to reach out for clarification.
 
 Sincerely,
 [Your Name]
@@ -117,13 +119,14 @@ NOTIFICATION
 
 Subject: [Subject of the Notification]
 
-In exercise of the powers conferred under [Relevant Law], 
-the government hereby notifies the following:
+Dear [Recipient],
+
+In exercise of the powers conferred under [Relevant Law], the government hereby notifies the following:
 
 1. [Notification Detail 1]
 2. [Notification Detail 2]
 
-This notification takes effect from [Date].
+This notification takes effect from [Date]. Please ensure that the information provided is disseminated and followed accordingly.
 
 By order of the Government,
 [Your Name]
@@ -133,24 +136,58 @@ By order of the Government,
 
 const Templates = () => {
   const [selectedDepartment, setSelectedDepartment] = useState(null);
+  const [placeholderValues, setPlaceholderValues] = useState({});
 
-  const handleClose = () => setSelectedDepartment(null);
+  const handleClose = () => {
+    setSelectedDepartment(null);
+    setPlaceholderValues({});
+  };
 
-  const handleOpen = (department) => setSelectedDepartment(department);
+  const handleOpen = (department) => {
+    setSelectedDepartment(department);
+    setPlaceholderValues({});
+  };
+
+  const handleInputChange = (placeholder, value) => {
+    setPlaceholderValues((prevValues) => ({
+      ...prevValues,
+      [placeholder]: value,
+    }));
+  };
+
+  const generatePDF = () => {
+    if (selectedDepartment) {
+      const doc = new jsPDF();
+      doc.setFontSize(16);
+      doc.text(selectedDepartment.title, 10, 20);
+      doc.setFontSize(12);
+      let letter = selectedDepartment.letter;
+
+      Object.keys(placeholderValues).forEach((key) => {
+        letter = letter.replace(`[${key}]`, placeholderValues[key]);
+      });
+
+      doc.text(letter, 10, 30);
+      doc.save(`${selectedDepartment.title}.pdf`);
+    }
+  };
 
   return (
-    <div className="bg-gray-100 text-gray-800 min-h-screen p-4">
+    <div className="bg-gray-100 text-gray-800 min-h-screen p-6">
       <div className="max-w-screen-lg mx-auto py-8">
-        <h1 className="text-4xl font-bold text-blue-800 mb-8 text-center">Government Departments</h1>
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+        <h1 className="text-4xl font-bold text-blue-800 mb-10 text-center">Government Departments</h1>
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
           {Object.entries(departments).map(([key, dept]) => (
-            <div key={key} className="bg-white border border-blue-100 rounded-lg shadow-md p-6 transition-transform transform hover:-translate-y-1 hover:shadow-lg">
-              <h2 className="text-2xl font-semibold text-blue-800 mb-2">{dept.title}</h2>
-              <p className="text-sm text-gray-600 mb-4">{dept.type}</p>
-              <p className="text-gray-800 mb-4">{dept.description}</p>
+            <div
+              key={key}
+              className="bg-white border border-blue-200 rounded-xl shadow-lg p-6 transition-transform transform hover:-translate-y-2 hover:shadow-2xl"
+              onClick={() => handleOpen(dept)}
+            >
+              <h2 className="text-2xl font-semibold text-blue-800 mb-4">{dept.title}</h2>
+              <p className="text-gray-600 mb-4">{dept.type}</p>
+              <p className="text-gray-700 mb-6">{dept.description}</p>
               <button
-                onClick={() => handleOpen(dept)}
-                className="bg-blue-800 text-white px-4 py-2 rounded-md hover:bg-blue-900 transition"
+                className="bg-blue-700 text-white px-6 py-2 rounded-md font-medium hover:bg-blue-800 transition"
               >
                 Explore
               </button>
@@ -160,24 +197,65 @@ const Templates = () => {
       </div>
 
       {selectedDepartment && (
-        <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50" onClick={handleClose}>
-          <div className="bg-white rounded-lg shadow-lg w-11/12 sm:w-3/4 lg:w-1/2 p-6 relative" onClick={(e) => e.stopPropagation()}>
+        <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50" onClick={handleClose}>
+          <div
+            className="bg-white rounded-2xl shadow-2xl w-10/12 sm:w-2/3 lg:w-1/2 p-8 relative max-h-[90vh] overflow-auto"
+            onClick={(e) => e.stopPropagation()}
+          >
             <button
               onClick={handleClose}
-              className="absolute top-4 right-4 text-gray-600 hover:text-gray-800 text-2xl"
+              className="absolute top-4 right-4 text-gray-600 hover:text-gray-800 text-2xl font-bold"
               aria-label="Close popup"
             >
               &times;
             </button>
-            <h2 className="text-3xl font-semibold text-blue-800 mb-2">{selectedDepartment.title}</h2>
-            <p className="text-sm text-gray-600 mb-4">{selectedDepartment.type}</p>
-            <p className="text-gray-800 mb-4">{selectedDepartment.description}</p>
-            {selectedDepartment.letter && (
-              <pre className="bg-gray-50 border border-gray-200 rounded-md p-4 text-sm font-mono">
-                {selectedDepartment.letter}
-              </pre>
-            )}
+            <h2 className="text-3xl font-semibold text-blue-800 mb-4">{selectedDepartment.title}</h2>
+            <p className="text-sm text-gray-600 mb-2">{selectedDepartment.type}</p>
+            <p className="text-gray-800 mb-6">{selectedDepartment.description}</p>
+
+            {/* Split inputs into two columns */}
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+              {selectedDepartment.letter.match(/\[(.*?)\]/g)?.map((placeholder, index) => (
+                <div key={index} className="mb-4">
+                  <label className="block text-gray-700 mb-2 font-medium">
+                    {placeholder.replace(/[\[\]]/g, '')}:
+                  </label>
+                  <input
+                    type="text"
+                    className="w-full border border-gray-300 rounded-md p-3 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                    onChange={(e) => handleInputChange(placeholder.replace(/[\[\]]/g, ''), e.target.value)}
+                  />
+                </div>
+              ))}
+            </div>
+
+            {/* Scrollable Content Container */}
+            <div className="bg-gray-100 border border-gray-300 rounded-lg p-6 text-sm font-mono mb-10 text-gray-800 h-[30vh] w-[100vh] overflow-auto">
+              {Object.keys(placeholderValues).length > 0
+                ? Object.keys(placeholderValues).reduce(
+                    (acc, key) => acc.replace(`[${key}]`, placeholderValues[key]),
+                    selectedDepartment.letter
+                  )
+                : selectedDepartment.letter}
+            </div>
+
+            <div className="flex justify-end space-x-4">
+              <button
+                onClick={handleClose}
+                className="bg-gray-300 text-gray-800 px-6 py-2 rounded-md hover:bg-gray-400 transition"
+              >
+                Back
+              </button>
+              <button
+                onClick={generatePDF}
+                className="bg-green-700 text-white px-6 py-2 rounded-md font-semibold hover:bg-green-800 transition"
+              >
+                Download PDF
+              </button>
+            </div>
           </div>
+       
+
         </div>
       )}
     </div>
