@@ -60,11 +60,8 @@ const App = () => {
           <Route path="/Inc_req" element={<Inc_req />} />
           <Route path="/Out_req" element={<Out_req />} />
           <Route path="/Discussion" element={<Discussion />} />
-<<<<<<< HEAD
-          <Route path="/schedulemeeting" element={<ScheduleMeeting/>} />
-=======
+          <Route path="/ScheduleMeeting" element={<ScheduleMeeting />} />
           <Route path="/Staff" element={<Staff />} />
->>>>>>> 43422adc3a64ee28fd77692e4de20effb14f1238
         </Routes>
       </BrowserRouter>
     </>
