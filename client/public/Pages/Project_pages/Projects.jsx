@@ -49,7 +49,6 @@ const Sidebar = () => {
             { name: 'Inventory', path: '/Inventory' },
             { name: 'Templates', path: '/Templates' },
             { name: 'Staff', path: '/Staff' },
-            { name: 'Lead', path: '/Lead' },
             { name: 'Complaints', path: '/Complaints' },
             { name: 'Office Budget', path: '/OfficeBudget' },
           ].map(({ name, path }) => (
