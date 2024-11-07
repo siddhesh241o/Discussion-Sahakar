@@ -25,6 +25,7 @@ import TopBanner from '../public/Components/TopBanner.jsx';
 import Discussion from '../public/Pages/Discussion.jsx';
 import CreateTask from '../public/Pages/Task_pages/CreateTask.jsx';
 import Expense from '../public/Pages/Project_pages/Expense.jsx';
+import OfficeBudget from '../public/Pages/Project_pages/OfficeBudget.jsx';
 import Staff from '../public/Pages/Staff.jsx';  // Corrected import path
 
 import '../src/App.css';
@@ -45,6 +46,8 @@ const App = () => {
           <Route path="/Geotagging" element={<Geotagging />} />
           <Route path="/Complaints" element={<Complaints />} />
           <Route path="/Expense" element={<Expense />} />
+          <Route path="/OfficeBudget" element={<OfficeBudget />} />
+          <Route path="/OfficeBudget" element={<OfficeBudget />} />
           <Route path="/Projects" element={<Projects />} />
           <Route path="/CreateProjectForm" element={<CreateProjectForm />} />
           <Route path="/MyProfile" element={<MyProfile />} />
