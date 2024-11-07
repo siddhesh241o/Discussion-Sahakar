@@ -61,6 +61,7 @@ const App = () => {
           <Route path="/Out_req" element={<Out_req />} />
           <Route path="/Discussion" element={<Discussion />} />
           <Route path="/schedulemeeting" element={<ScheduleMeeting/>} />
+          <Route path="/ScheduleMeeting" element={<ScheduleMeeting />} />
           <Route path="/Staff" element={<Staff />} />
         </Routes>
       </BrowserRouter>
