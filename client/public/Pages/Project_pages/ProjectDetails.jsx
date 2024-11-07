@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { BarChart, Bar, XAxis, YAxis, Tooltip, ResponsiveContainer, PieChart, Pie, Cell } from 'recharts';
 import { Briefcase, CheckSquare, Users, Clock } from 'lucide-react';
-import Sidebar from './Sidebar';
+import Navbar from './Navbar';
 
 const ProjectDetails = () => {
   const [timeRange, setTimeRange] = useState('Last 30 days');
@@ -35,10 +35,11 @@ const ProjectDetails = () => {
   ];
 
   return (
-    <div className="min-h-screen bg-gray-100 p-4">
+    <div className="min-h-screen bg-white-100">
+      <Navbar></Navbar>
       <div className="max-w-7xl mx-auto">
         <header className="flex justify-between items-center mb-6">
-          <h1 className="text-2xl font-bold">Dashboard</h1>
+          <h1 className="text-2xl font-bold">Details</h1>
           <select
             value={timeRange}
             onChange={(e) => setTimeRange(e.target.value)}

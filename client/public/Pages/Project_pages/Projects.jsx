@@ -30,29 +30,35 @@ const Sidebar = () => {
         className={`w-64 bg-blue-900 text-white p-4 h-screen md:block ${isOpen ? 'block' : 'hidden'} md:h-screen md:relative absolute top-0 left-0 z-20 md:z-auto`}
       >
         <nav>
+          <button
+            onClick={() => handleNavigation('/Dashboard')} // Navigate to Dashboard when clicked
+            className="block py-2 px-4 hover:bg-blue-700 rounded text-left w-full"
+          >
+            &lt; Go Back
+          </button>
           {[
-            'My Profile',
-            'Task Management',
-            'Project Directory',
-            'Meeting Scheduling',
-            'Notifications',
-            'Seminar/Workshops',
-            'Discussions',
-            'GIS',
-            'Geotagging',
-            'Inventory',
-            'Templates',
-            'Staff',
-            'Lead',
-            'Complaints',
-            'Office Budget',
-          ].map((item) => (
+            { name: 'My Profile', path: '/MyProfile' },
+            { name: 'Task Management', path: '/TaskManager' },
+            { name: 'Project Directory', path: '/Expense' },
+            { name: 'Meeting Scheduling', path: '/Meeting' },
+            { name: 'Notifications', path: '/Notifications' },
+            { name: 'Seminar/Workshops', path: '/Seminar' },
+            { name: 'Discussions', path: '/Discussion' },
+            { name: 'GIS', path: '/GIS' },
+            { name: 'Geotagging', path: '/Geotagging' },
+            { name: 'Inventory', path: '/Inventory' },
+            { name: 'Templates', path: '/Templates' },
+            { name: 'Staff', path: '/Staff' },
+            { name: 'Lead', path: '/Lead' },
+            { name: 'Complaints', path: '/Complaints' },
+            { name: 'Office Budget', path: '/OfficeBudget' },
+          ].map(({ name, path }) => (
             <button
-              key={item}
-              onClick={() => handleNavigation(item === 'My Profile' ? '/MyProfile' : '#')}
+              key={name}
+              onClick={() => handleNavigation(path)}
               className="block py-2 px-4 hover:bg-blue-700 rounded text-left w-full"
             >
-              {item}
+              {name}
             </button>
           ))}
         </nav>
@@ -70,7 +76,7 @@ const ProjectList = () => {
 
   return (
     <div className="mt-6">
-      {[
+      {[ 
         { id: 6432, name: 'National Gas Infrastructure Development Plan', progress: 100 },
         { id: 4530, name: 'National Gas Pipeline Expansion Initiative', progress: 64 },
         { id: 2343, name: 'National Highway Expansion Project', progress: 66 },

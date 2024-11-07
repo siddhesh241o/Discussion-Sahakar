@@ -1,7 +1,7 @@
 import React from 'react';
-import { LineChart, Line, BarChart, Bar, PieChart, Pie, Cell, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from 'recharts';
-import { Bell, CreditCard, DollarSign, Home, PieChart as PieChartIcon, Settings, User } from 'lucide-react';
-import { useNavigate } from 'react-router-dom';
+import { LineChart, Line, PieChart, Pie, Cell, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from 'recharts';
+import { Bell } from 'lucide-react';
+import Navbar from './Navbar';
 
 const monthlyData = [
   { name: 'Jan', income: 4000, expense: 2400 },
@@ -29,43 +29,11 @@ const expenseData = [
 
 const COLORS = ['#0088FE', '#00C49F', '#FFBB28', '#FF8042', '#8884D8', '#82CA9D'];
 
-const Sidebar = () => {
-    const navigate = useNavigate();
-  
-    const menuItems = [
-      { icon: <PieChartIcon size={20} />, label: 'Dashboard', path: '/' },
-      { icon: <DollarSign size={20} />, label: 'Project Details', path: '/ProjectDetails' },
-      { icon: <Home size={20} />, label: 'Timeline', path: '#' }, // Add a path if needed
-      { icon: <User size={20} />, label: 'Reports', path: '#' }, // Add a path if needed
-    ];
-  
-    return (
-      <div className="w-64 bg-white h-screen p-4 hidden md:block">
-        <h2 className="text-2xl font-bold mb-8">Project Dashboard</h2>
-        <nav>
-          {menuItems.map((item, index) => (
-            <div
-              key={index}
-              className={`flex items-center space-x-2 p-2 rounded ${
-                index === 0 ? 'bg-black text-white' : 'text-gray-600 hover:bg-gray-100'
-              }`}
-              onClick={() => navigate(item.path)}
-            >
-              {item.icon}
-              <span>{item.label}</span>
-            </div>
-          ))}
-        </nav>
-      </div>
-    );
-};
-
 const Header = () => (
   <header className="bg-white p-4 flex justify-between items-center">
     <h1 className="text-xl font-semibold">Dashboard</h1>
     <div className="flex items-center space-x-4">
       <Bell size={20} />
-      <img src="/api/placeholder/32/32" alt="User" className="w-8 h-8 rounded-full" />
     </div>
   </header>
 );
@@ -89,183 +57,184 @@ const StatCard = ({ label, value, change, color }) => (
 
 const Expense = () => {
   return (
-    <div className="flex bg-gray-100 min-h-screen">
-      <Sidebar />
-      <div className="flex-1 overflow-hidden">
-        <Header />
-        <main className="p-6 overflow-y-auto" style={{height: 'calc(100vh - 64px)'}}>
-          <div className="mb-6">
-            <h2 className="text-lg font-semibold mb-2">Navi Mumbai International Airport</h2>
-            <p className="text-sm text-gray-600">Let's manage & analyse expenditure</p>
-          </div>
+    <div className="flex flex-col bg-white h-screen">
+      <Navbar></Navbar>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
-            <StatCard label="Total revenue" value="320,000" change={8.5} color="blue" />
-            <StatCard label="Total expense" value="240,000" change={-10.2} color="red" />
-            <StatCard label="Total profit" value="160,000" change={16.4} color="green" />
-          </div>
+      <div className="flex flex-1">
+        <div className="flex-1 h-full overflow-y-auto">
+          <Header />
+          <main className="p-6">
+            <div className="mb-6">
+              <h2 className="text-lg font-semibold mb-2">Navi Mumbai International Airport</h2>
+              <p className="text-sm text-gray-600">Let's manage & analyse expenditure</p>
+            </div>
 
-          <div className="bg-white p-4 rounded-lg mb-6">
-            <div className="flex justify-between items-center mb-4">
-              <h3 className="text-lg font-semibold">Analysis</h3>
-              <div className="flex items-center space-x-2">
-                <div className="flex items-center">
-                  <div className="w-3 h-3 bg-blue-500 rounded-full mr-1"></div>
-                  <span className="text-sm">Income</span>
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
+              <StatCard label="Total revenue" value="320,000" change={8.5} color="blue" />
+              <StatCard label="Total expense" value="240,000" change={-10.2} color="red" />
+              <StatCard label="Total profit" value="160,000" change={16.4} color="green" />
+            </div>
+
+            <div className="bg-white p-4 rounded-lg mb-6">
+              <div className="flex justify-between items-center mb-4">
+                <h3 className="text-lg font-semibold">Analysis</h3>
+                <div className="flex items-center space-x-2">
+                  <div className="flex items-center">
+                    <div className="w-3 h-3 bg-blue-500 rounded-full mr-1"></div>
+                    <span className="text-sm">Income</span>
+                  </div>
+                  <div className="flex items-center">
+                    <div className="w-3 h-3 bg-red-500 rounded-full mr-1"></div>
+                    <span className="text-sm">Expense</span>
+                  </div>
+                  <select className="bg-gray-100 text-sm p-1 rounded">
+                    <option>2022</option>
+                    <option>2023</option>
+                  </select>
                 </div>
+              </div>
+              <ResponsiveContainer width="100%" height={300}>
+                <LineChart data={monthlyData}>
+                  <CartesianGrid strokeDasharray="3 3" />
+                  <XAxis dataKey="name" />
+                  <YAxis />
+                  <Tooltip />
+                  <Legend />
+                  <Line type="monotone" dataKey="income" stroke="#3B82F6" />
+                  <Line type="monotone" dataKey="expense" stroke="#EF4444" />
+                </LineChart>
+              </ResponsiveContainer>
+            </div>
+
+            <div className="bg-white p-4 rounded-lg mb-6 border border-black">
+              <h3 className="text-lg font-semibold mb-4">Transaction history</h3>
+              <table className="w-full">
+                <thead>
+                  <tr className="text-left text-gray-600">
+                    <th className="pb-2">Transaction</th>
+                    <th className="pb-2">Type</th>
+                    <th className="pb-2">Amount</th>
+                    <th className="pb-2">Date</th>
+                    <th className="pb-2">Status</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td className="py-2 flex items-center">
+                      <div className="w-8 h-8 rounded-full bg-green-100 flex items-center justify-center mr-2">
+                        <span className="text-green-600 font-bold">U</span>
+                      </div>
+                      Land
+                    </td>
+                    <td>Housing</td>
+                    <td>$150.00</td>
+                    <td>14 Aug, 2023</td>
+                    <td className="text-green-600">Credited</td>
+                  </tr>
+                  <tr>
+                    <td className="py-2 flex items-center">
+                      <div className="w-8 h-8 rounded-full bg-red-100 flex items-center justify-center mr-2">
+                        <span className="text-red-600 font-bold">N</span>
+                      </div>
+                      Runway
+                    </td>
+                    <td>Roads</td>
+                    <td>$60.00</td>
+                    <td>10 Aug, 2023</td>
+                    <td className="text-red-600">Debited</td>
+                  </tr>
+                  <tr>
+                    <td className="py-2 flex items-center">
+                      <div className="w-8 h-8 rounded-full bg-green-100 flex items-center justify-center mr-2">
+                        <span className="text-green-600 font-bold">S</span>
+                      </div>
+                      Pipelines
+                    </td>
+                    <td>Waters</td>
+                    <td>$10.00</td>
+                    <td>29 July, 2023</td>
+                    <td className="text-red-600">Debited</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </main>
+        </div>
+        <div className="w-64 bg-white-100 h-64 flex flex-col p-4">
+          <div className="flex justify-between items-center mb-4">
+            <h3 className="text-lg font-semibold">My Department</h3>
+            <button className="text-blue-500">+ Add Resources</button>
+          </div>
+          <div className="bg-black text-white p-4 rounded-lg mb-6 flex-1">
+            <p className="text-sm mb-2">Roads & Transport</p>
+            <p className="text-lg mb-2">Investment</p>
+            <div className="flex justify-between items-center">
+              <p className="text-sm">$423,007</p>
+            </div>
+          </div>
+
+          <h3 className="text-lg font-semibold mb-4">Saving plan</h3>
+          <div className="space-y-4 mb-6 flex-1">
+            <div>
+              <div className="flex justify-between items-center mb-1">
                 <div className="flex items-center">
-                  <div className="w-3 h-3 bg-red-500 rounded-full mr-1"></div>
-                  <span className="text-sm">Expense</span>
+                  <span className="mr-2">🚗</span>
+                  <p>New Runway</p>
                 </div>
-                <select className="bg-gray-100 text-sm p-1 rounded">
-                  <option>2022</option>
-                  <option>2023</option>
-                </select>
+                <button>•••</button>
               </div>
-            </div>
-            <ResponsiveContainer width="100%" height={300}>
-              <LineChart data={monthlyData}>
-                <CartesianGrid strokeDasharray="3 3" />
-                <XAxis dataKey="name" />
-                <YAxis />
-                <Tooltip />
-                <Legend />
-                <Line type="monotone" dataKey="income" stroke="#3B82F6" />
-                <Line type="monotone" dataKey="expense" stroke="#EF4444" />
-              </LineChart>
-            </ResponsiveContainer>
-          </div>
-
-          <div className="bg-white p-4 rounded-lg mb-6">
-            <h3 className="text-lg font-semibold mb-4">Transaction history</h3>
-            <table className="w-full">
-              <thead>
-                <tr className="text-left text-gray-600">
-                  <th className="pb-2">Transaction</th>
-                  <th className="pb-2">Type</th>
-                  <th className="pb-2">Amount</th>
-                  <th className="pb-2">Date</th>
-                  <th className="pb-2">Status</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td className="py-2 flex items-center">
-                    <div className="w-8 h-8 rounded-full bg-green-100 flex items-center justify-center mr-2">
-                      <span className="text-green-600 font-bold">U</span>
-                    </div>
-                    Land
-                  </td>
-                  <td>Housing</td>
-                  <td>$150.00</td>
-                  <td>14 Aug, 2023</td>
-                  <td className="text-green-600">Credited</td>
-                </tr>
-                <tr>
-                  <td className="py-2 flex items-center">
-                    <div className="w-8 h-8 rounded-full bg-red-100 flex items-center justify-center mr-2">
-                      <span className="text-red-600 font-bold">N</span>
-                    </div>
-                    Runway
-                  </td>
-                  <td>Roads</td>
-                  <td>$60.00</td>
-                  <td>10 Aug, 2023</td>
-                  <td className="text-red-600">Debited</td>
-                </tr>
-                <tr>
-                  <td className="py-2 flex items-center">
-                    <div className="w-8 h-8 rounded-full bg-green-100 flex items-center justify-center mr-2">
-                      <span className="text-green-600 font-bold">S</span>
-                    </div>
-                    Pipelines
-                  </td>
-                  <td>Waters</td>
-                  <td>$10.00</td>
-                  <td>29 July, 2023</td>
-                  <td className="text-red-600">Debited</td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
-        </main>
-      </div>
-
-      <div className="w-64 bg-white p-4 hidden lg:block">
-        <div className="flex justify-between items-center mb-4">
-          <h3 className="text-lg font-semibold">My Department</h3>
-          <button className="text-blue-500">+ Add Resources</button>
-        </div>
-        <div className="bg-black text-white p-4 rounded-lg mb-6">
-          <p className="text-sm mb-2">Roads & Transport</p>
-          <p className="text-lg mb-2">Investment</p>
-          <div className="flex justify-between items-center">
-            <p className="text-sm">$423,007</p>
-            <div className="w-8 h-4 bg-white rounded-full"></div>
-          </div>
-        </div>
-
-        <h3 className="text-lg font-semibold mb-4">Saving plan</h3>
-        <div className="space-y-4 mb-6">
-          <div>
-            <div className="flex justify-between items-center mb-1">
-              <div className="flex items-center">
-                <span className="mr-2">🚗</span>
-                <p>New Runway</p>
+              <p className="text-sm text-gray-600 mb-1">Target: $20,000</p>
+              <div className="w-full bg-gray-200 rounded-full h-2.5">
+                <div className="bg-blue-600 h-2.5 rounded-full" style={{ width: '45%' }}></div>
               </div>
-              <button>•••</button>
+              <p className="text-sm text-gray-600 mt-1">Saving: $17,563</p>
             </div>
-            <p className="text-sm text-gray-600 mb-1">Target: $20,000</p>
-            <div className="w-full bg-gray-200 rounded-full h-2.5">
-              <div className="bg-blue-600 h-2.5 rounded-full" style={{ width: '45%' }}></div>
-            </div>
-            <p className="text-sm text-gray-600 mt-1">Saving: $17,563</p>
-          </div>
-          <div>
-            <div className="flex justify-between items-center mb-1">
-              <div className="flex items-center">
-                <span className="mr-2">🏠</span>
-                <p>New Terminal</p>
+            <div>
+              <div className="flex justify-between items-center mb-1">
+                <div className="flex items-center">
+                  <span className="mr-2">🏠</span>
+                  <p>New Terminal</p>
+                </div>
+                <button>•••</button>
               </div>
-              <button>•••</button>
+              <p className="text-sm text-gray-600 mb-1">Target: $150,000</p>
+              <div className="w-full bg-gray-200 rounded-full h-2.5">
+                <div className="bg-green-600 h-2.5 rounded-full" style={{ width: '60%' }}></div>
+              </div>
+              <p className="text-sm text-gray-600 mt-1">Saving: $19,759</p>
             </div>
-            <p className="text-sm text-gray-600 mb-1">Target: $150,000</p>
-            <div className="w-full bg-gray-200 rounded-full h-2.5">
-              <div className="bg-green-600 h-2.5 rounded-full" style={{ width: '60%' }}></div>
-            </div>
-            <p className="text-sm text-gray-600 mt-1">Saving: $19,759</p>
           </div>
-        </div>
 
-        <h3 className="text-lg font-semibold mb-4">Expense Breakdown</h3>
-        <ResponsiveContainer width="100%" height={200}>
-          <PieChart>
-            <Pie
-              data={expenseData}
-              cx="50%"
-              cy="50%"
-              innerRadius={60}
-              outerRadius={80}
-              fill="#8884d8"
-              paddingAngle={5}
-              dataKey="value"
-            >
-              {expenseData.map((entry, index) => (
-                <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
-              ))}
-            </Pie>
-            <Tooltip />
-          </PieChart>
-        </ResponsiveContainer>
+          <h3 className="text-lg font-semibold mb-4">Expense Breakdown</h3>
+          <ResponsiveContainer width="100%" height={200}>
+            <PieChart>
+              <Pie
+                data={expenseData}
+                cx="50%"
+                cy="50%"
+                innerRadius={60}
+                outerRadius={80}
+                fill="#8884d8"
+                paddingAngle={5}
+                dataKey="value"
+              >
+                {expenseData.map((entry, index) => (
+                  <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
+                ))}
+              </Pie>
+              <Tooltip />
+            </PieChart>
+          </ResponsiveContainer>
 
-        <h3 className="text-lg font-semibold my-4">Quick Transfer</h3>
-        <div className="flex space-x-2">
-          <div className="w-10 h-10 bg-gray-200 rounded-full flex items-center justify-center text-gray-600">+</div>
-          {['J', 'A', 'N', 'H'].map((initial, index) => (
-            <div key={index} className="w-10 h-10 bg-gray-200 rounded-full flex items-center justify-center">
-              {initial}
-            </div>
-          ))}
+          <h3 className="text-lg font-semibold my-4">Quick Transfer</h3>
+          <div className="flex space-x-2">
+            <div className="w-10 h-10 bg-gray-200 rounded-full flex items-center justify-center text-gray-600">+</div>
+            {['J', 'A', 'N', 'H'].map((initial, index) => (
+              <div key={index} className="w-10 h-10 bg-gray-200 rounded-full flex items-center justify-center">
+                {initial}
+              </div>
+            ))}
+          </div>
         </div>
       </div>
     </div>
