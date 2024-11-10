@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 const Task = () => {
+  const navigate = useNavigate();
   const [file, setFile] = useState(null);
 
   const handleFileChange = (event) => {
@@ -17,9 +19,6 @@ const Task = () => {
     <div className="max-w-2xl mx-auto p-6 bg-white shadow-lg rounded-lg">
       <div className="flex justify-between items-center mb-4">
         <h1 className="text-2xl font-bold text-gray-900">Task Details</h1>
-        <button className="px-4 py-2 text-sm text-gray-600 border border-gray-300 rounded hover:bg-gray-100">
-          SAVE
-        </button>
       </div>
 
       <form onSubmit={handleSubmit}>
@@ -101,14 +100,11 @@ const Task = () => {
         </div>
 
         <div className="mt-6 flex justify-between">
-          <button type="button" className="px-4 py-2 text-sm text-red-600 hover:text-red-800">
+          <button type="button" className="px-4 py-2 text-sm text-red-600 hover:text-red-800" onClick={() => navigate('/TaskManager')}>
             Cancel
           </button>
-          <div className="space-x-4">
-            <button type="button" className="px-4 py-2 text-sm text-gray-600 border border-gray-300 rounded hover:bg-gray-100">
-              BACK
-            </button>
-            <button type="submit" className="px-4 py-2 text-sm text-white bg-blue-600 rounded hover:bg-blue-700">
+          <div className="space-x-4"> 
+            <button type="submit" className="px-4 py-2 text-sm text-white bg-blue-600 rounded hover:bg-blue-700" onClick={() => navigate('/TaskManager')}>
               SUBMIT
             </button>
           </div>

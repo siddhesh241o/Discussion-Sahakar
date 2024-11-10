@@ -110,7 +110,7 @@ const Expense = () => {
               <h3 className="text-lg font-semibold mb-4">Transaction history</h3>
               <table className="w-full">
                 <thead>
-                  <tr className="text-left text-gray-600">
+                  <tr className="text-gray-600">
                     <th className="pb-2">Transaction</th>
                     <th className="pb-2">Type</th>
                     <th className="pb-2">Amount</th>

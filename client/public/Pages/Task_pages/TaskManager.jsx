@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom'; // Import useNavigate
 import { Search, Filter, Plus } from 'lucide-react';
 import TaskStatus from './TaskStatus'; // Import the TaskStatus component
+import Approval from './Approval';
 
 // RadioInputs component
 const RadioInputs = ({ selected, onChange }) => {
@@ -41,6 +42,23 @@ const RadioInputs = ({ selected, onChange }) => {
           Task Status
         </span>
       </label>
+      <label className="flex-1 text-center">
+        <input
+          type="radio"
+          name="radio"
+          value="Approval"
+          checked={selected === 'Approval'}
+          onChange={onChange}
+          className="hidden"
+        />
+        <span
+          className={`flex cursor-pointer items-center justify-center rounded-lg py-2 px-4 transition-all duration-150 ease-in-out ${
+            selected === 'Approval' ? 'bg-white font-semibold' : 'text-gray-800'
+          }`}
+        >
+          Approval Requests
+        </span>
+      </label>
     </div>
   );
 };
@@ -50,7 +68,7 @@ const TaskTable = () => {
   const navigate = useNavigate(); // Initialize useNavigate
 
   const tasks = [
-    { id: 'Task ID', name: 'Task Name', date: 'Date', assignedBy: 'Assigned By', department: 'Department', status: 'Status' },
+    // { id: 'Task ID', name: 'Task Name', date: 'Date', assignedBy: 'Assigned By', department: 'Department', status: 'Status' },
     { id: 'T-12345', name: 'Complete Report', date: '09/15/24', assignedBy: 'Alice Johnson', department: 'Inter-department', status: 'Pending' },
     { id: 'T-12346', name: 'Update Website', date: '09/14/24', assignedBy: 'Bob Smith', department: 'Intra-department', status: 'Pending' },
     { id: 'T-12347', name: 'Design Marketing Materials', date: '09/13/24', assignedBy: 'Charlie Brown', department: 'Inter-department', status: 'Pending' },
@@ -93,7 +111,7 @@ const TaskTable = () => {
         <div className="overflow-x-auto"> {/* Enable horizontal scroll */}
           <table className="w-full table-auto min-w-[800px]"> {/* Ensure minimum width */}
             <thead>
-              <tr className="text-left">
+              <tr className="">
                 <th className="px-2 py-3">ID</th>
                 <th className="px-2 py-3">Task Name</th>
                 <th className="px-2 py-3">Date</th>
@@ -164,6 +182,7 @@ const TaskManager = () => {
       </div>
       {selected === 'Pending Tasks' && <TaskTable />}
       {selected === 'Task Status' && <TaskStatus />}
+      {selected === 'Approval' && <Approval />}
     </div>
   );
 };
