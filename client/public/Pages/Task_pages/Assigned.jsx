@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { FiSearch } from 'react-icons/fi';
 
-const Approval = () => {
+const Assigned = () => {
   const [requests, setRequests] = useState([
     { 
       id: 'T-12345', 
@@ -9,8 +9,8 @@ const Approval = () => {
       date: "2024-11-27", 
       reqby: "Prasad Mahankal", 
       category: "Permission", 
-      status: "Pending", 
-      action: "Approve",
+      status: "Assigned", 
+      action: "None",
       description: "Tender approval required for new office supplies procurement",
       priority: "High",
       completionDate: "2024-11-26 15:30",
@@ -35,8 +35,7 @@ const Approval = () => {
       completionDate: "2024-11-30 14:45",
       documents: [
         { name: "budget_proposal.pdf", type: "PDF" },
-        { name: "financial_forecast.xlsx", type: "Excel" },
-        { name: "department_needs.docx", type: "Word" }
+        { name: "financial_forecast.xlsx", type: "Excel" }
       ],
       additionalNotes: "Budget proposal includes detailed breakdown of infrastructure needs and ROI analysis.",
       declineReason: '',
@@ -48,16 +47,15 @@ const Approval = () => {
       date: "2024-12-03", 
       reqby: "Siddhesh Patil", 
       category: "Data sharing", 
-      status: "Pending", 
-      action: "Approve",
+      status: "Assigned", 
+      action: "None",
       description: "Data sharing agreement with external vendor for cloud services",
       priority: "Medium",
       completionDate: "2024-12-02 11:20",
       documents: [
-        { name: "agreement_draft.pdf", type: "PDF" },
-        { name: "security_assessment.pdf", type: "PDF" }
+        { name: "agreement_draft.pdf", type: "PDF" }
       ],
-      additionalNotes: "Legal team has reviewed and approved the agreement terms.",
+      additionalNotes: "Awaiting additional documentation from vendor",
       declineReason: '',
       declineMessage: ''
     },
@@ -73,51 +71,9 @@ const Approval = () => {
       priority: "Critical",
       completionDate: "2024-12-04 16:15",
       documents: [
-        { name: "infrastructure_plan.pdf", type: "PDF" },
-        { name: "network_diagram.vsd", type: "Visio" },
-        { name: "cost_estimation.xlsx", type: "Excel" }
+        { name: "infrastructure_plan.pdf", type: "PDF" }
       ],
-      additionalNotes: "Project timeline and resource allocation has been finalized with vendors.",
-      declineReason: '',
-      declineMessage: ''
-    },
-    { 
-      id: 'T-12349', 
-      name: "Policy Documentation", 
-      date: "2024-12-07", 
-      reqby: "Ashish Suryawanshi", 
-      category: "Documentation", 
-      status: "Pending", 
-      action: "Approve",
-      description: "Update to company-wide IT security policies and procedures",
-      priority: "High",
-      completionDate: "2024-12-06 13:50",
-      documents: [
-        { name: "security_policy_v2.pdf", type: "PDF" },
-        { name: "change_log.docx", type: "Word" },
-        { name: "compliance_checklist.xlsx", type: "Excel" }
-      ],
-      additionalNotes: "Updated policies align with latest ISO27001 requirements.",
-      declineReason: '',
-      declineMessage: ''
-    },
-    { 
-      id: 'T-12350', 
-      name: "Project Collaboration", 
-      date: "2024-12-10", 
-      reqby: "Pawan Patil", 
-      category: "General", 
-      status: "Pending", 
-      action: "Approve",
-      description: "Cross-department collaboration platform implementation",
-      priority: "Medium",
-      completionDate: "2024-12-09 10:00",
-      documents: [
-        { name: "platform_specs.pdf", type: "PDF" },
-        { name: "user_requirements.docx", type: "Word" },
-        { name: "integration_plan.pdf", type: "PDF" }
-      ],
-      additionalNotes: "User acceptance testing completed with positive feedback from all departments.",
+      additionalNotes: "Project timeline and resource allocation has been finalized.",
       declineReason: '',
       declineMessage: ''
     }
@@ -139,7 +95,7 @@ const Approval = () => {
 
   const handleFinalApprove = () => {
     setRequests(requests.map(request =>
-      request.id === selectedRequest.id ? { ...request, status: 'Approved' } : request
+      request.id === selectedRequest.id ? { ...request, status: 'Approved', action: 'None' } : request
     ));
     setShowApprovalModal(false);
     setSelectedRequest(null);
@@ -156,6 +112,7 @@ const Approval = () => {
         ? { 
             ...request, 
             status: 'Declined', 
+            action: 'None',
             declineReason,
             declineMessage 
           } 
@@ -172,8 +129,25 @@ const Approval = () => {
     (selectedCategory === '' || request.category === selectedCategory)
   );
 
-  const renderDeclineDetails = (request) => {
-    if (request.status === 'Declined') {
+  const renderActionButtons = (request) => {
+    if (request.action === 'Approve') {
+      return (
+        <>
+          <button
+            className="bg-blue-500 text-white py-1 px-4 rounded hover:bg-blue-600 transition duration-200"
+            onClick={() => handleApproveClick(request)}
+          >
+            Approve
+          </button>
+          <button
+            className="bg-red-500 text-white py-1 px-4 rounded hover:bg-red-600 transition duration-200"
+            onClick={() => handleDecline(request.id)}
+          >
+            Decline
+          </button>
+        </>
+      );
+    } else if (request.status === 'Declined') {
       return (
         <div className="text-sm text-red-600">
           <div><strong>Reason:</strong> {request.declineReason}</div>
@@ -182,8 +156,24 @@ const Approval = () => {
           )}
         </div>
       );
+    } else {
+      return (
+        <span className="text-gray-500 italic">
+          {getStatusMessage(request.status)}
+        </span>
+      );
     }
-    return null;
+  };
+
+  const getStatusMessage = (status) => {
+    switch (status) {
+      case 'Assigned':
+        return 'Not yet completed';
+      case 'Approved':
+        return 'Request approved';
+      default:
+        return 'No action required';
+    }
   };
 
   const TaskDetailsModal = ({ request, onClose, onApprove }) => (
@@ -269,7 +259,6 @@ const Approval = () => {
     <div className="mx-auto p-6 bg-gray-100 min-h-screen">
       <h1 className="text-xl sm:text-2xl font-bold mb-4">Incoming Requests</h1>
 
-      {/* Search and Filter */}
       <div className="mb-6 flex flex-col md:flex-row md:items-center md:justify-between">
         <div className="relative w-full md:w-1/2 mb-4 md:mb-0">
           <input
@@ -297,7 +286,6 @@ const Approval = () => {
         </select>
       </div>
 
-      {/* Table */}
       <div className="overflow-x-auto">
         <table className="table-auto w-full bg-white shadow-md rounded-lg border border-gray-300">
           <thead>
@@ -322,24 +310,7 @@ const Approval = () => {
                 <td className={`px-4 py-2 ${getStatusClass(request.status)}`}>{request.status}</td>
                 <td className="px-4 py-2">
                   <div className="flex flex-col items-center gap-2">
-                    {request.status === 'Pending' ? (
-                      <>
-                        <button
-                          className="bg-blue-500 text-white py-1 px-4 rounded hover:bg-blue-600 transition duration-200"
-                          onClick={() => handleApproveClick(request)}
-                        >
-                          Approve
-                        </button>
-                        <button
-                          className="bg-red-500 text-white py-1 px-4 rounded hover:bg-red-600 transition duration-200"
-                          onClick={() => handleDecline(request.id)}
-                        >
-                          Decline
-                        </button>
-                      </>
-                    ) : (
-                      renderDeclineDetails(request)
-                    )}
+                    {renderActionButtons(request)}
                   </div>
                 </td>
               </tr>
@@ -348,7 +319,6 @@ const Approval = () => {
         </table>
       </div>
 
-      {/* Task Details Modal */}
       {showApprovalModal && selectedRequest && (
         <TaskDetailsModal
           request={selectedRequest}
@@ -360,7 +330,6 @@ const Approval = () => {
         />
       )}
 
-      {/* Decline Modal */}
       {declineModal && (
         <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50">
           <div className="bg-white p-6 rounded-lg shadow-lg w-80">
@@ -424,4 +393,4 @@ const getStatusClass = (status) => {
   }
 };
 
-export default Approval;
+export default Assigned;

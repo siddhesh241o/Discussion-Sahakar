@@ -3,11 +3,12 @@ import { useNavigate } from 'react-router-dom'; // Import useNavigate
 import { Search, Filter, Plus } from 'lucide-react';
 import TaskStatus from './TaskStatus'; // Import the TaskStatus component
 import Approval from './Approval';
+import Assigned from './Assigned';
 
 // RadioInputs component
 const RadioInputs = ({ selected, onChange }) => {
   return (
-    <div className="relative flex flex-wrap rounded-lg bg-gray-200 shadow-md p-1 w-full sm:w-72 text-sm">
+    <div className="relative flex flex-wrap rounded-lg bg-gray-200 shadow-md p-1 w-1/2 text-sm">
       <label className="flex-1 text-center">
         <input
           type="radio"
@@ -22,7 +23,7 @@ const RadioInputs = ({ selected, onChange }) => {
             selected === 'Pending Tasks' ? 'bg-white font-semibold' : 'text-gray-800'
           }`}
         >
-          Pending Tasks
+          My Pending Tasks
         </span>
       </label>
       <label className="flex-1 text-center">
@@ -39,7 +40,7 @@ const RadioInputs = ({ selected, onChange }) => {
             selected === 'Task Status' ? 'bg-white font-semibold' : 'text-gray-800'
           }`}
         >
-          Task Status
+          My Task Status
         </span>
       </label>
       <label className="flex-1 text-center">
@@ -57,6 +58,23 @@ const RadioInputs = ({ selected, onChange }) => {
           }`}
         >
           Approval Requests
+        </span>
+      </label>
+      <label className="flex-1 text-center">
+        <input
+          type="radio"
+          name="radio"
+          value="Assigned"
+          checked={selected === 'Assigned'}
+          onChange={onChange}
+          className="hidden"
+        />
+        <span
+          className={`flex cursor-pointer items-center justify-center rounded-lg py-2 px-4 transition-all duration-150 ease-in-out ${
+            selected === 'Assigned' ? 'bg-white font-semibold' : 'text-gray-800'
+          }`}
+        >
+          Assigned Tasks
         </span>
       </label>
     </div>
@@ -183,6 +201,7 @@ const TaskManager = () => {
       {selected === 'Pending Tasks' && <TaskTable />}
       {selected === 'Task Status' && <TaskStatus />}
       {selected === 'Approval' && <Approval />}
+      {selected === 'Assigned' && <Assigned/>}
     </div>
   );
 };

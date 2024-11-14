@@ -22,20 +22,9 @@ const CreateTask = () => {
   };
 
   return (
-    <div className="max-w-md mx-auto p-5 border border-gray-300 rounded-lg bg-gray-100 shadow-md">
-    <h1 className="text-center mb-5 text-4xl font-extrabold">Create New Task</h1>
+    <div className="w-1/2 mx-auto p-5 border border-gray-300 rounded-lg bg-white shadow-md">
+    <h1 className="text-center mb-5 text-3xl font-bold">Assign New Task</h1>
 <form onSubmit={handleSubmit}>
-        <div className="mb-4">
-          <label htmlFor="taskID" className="block mb-1 font-bold">Task ID:</label>
-          <input
-            type="text"
-            id="taskID"
-            value={taskID}
-            onChange={(e) => setTaskID(e.target.value)}
-            required
-            className="w-full p-2 border border-gray-300 rounded"
-          />
-        </div>
         <div className="mb-4">
           <label htmlFor="taskName" className="block mb-1 font-bold">Task Name:</label>
           <input
