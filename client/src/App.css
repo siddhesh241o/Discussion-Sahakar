@@ -162,3 +162,20 @@ td{
     display: grid;
     grid-template-columns: 1fr 4fr 7fr;
 }
+.scrollbar::-webkit-scrollbar{
+width: 10px;
+}
+.scrollbar::-webkit-scrollbar-track{
+@apply bg-slate-100 
+}
+.scrollbar::-webkit-scrollbar-thumb{
+@apply bg-slate-200 rounded-full
+}
+.input-section {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 60px; 
+    background-color: white;
+}

@@ -22,18 +22,23 @@ import MyInventory from '../public/Pages/Inventory_pages/MyInventory.jsx';
 import Inc_req from '../public/Pages/Inventory_pages/Inc_req.jsx';
 import Out_req from '../public/Pages/Inventory_pages/Out_req.jsx';
 import TopBanner from '../public/Components/TopBanner.jsx';
-import Discussion from '../public/Pages/Discussion.jsx';
+import Discussion from '../public/Pages/DiscussionForum/Discussion.jsx';
 import CreateTask from '../public/Pages/Task_pages/CreateTask.jsx';
 import Expense from '../public/Pages/Project_pages/Expense.jsx';
 import OfficeBudget from '../public/Pages/Project_pages/OfficeBudget.jsx';
 import Staff from '../public/Pages/Staff.jsx';  // Corrected import path
-
+import MessagePage from '../public/Pages/DiscussionForum/MessagePage.jsx';
 import '../src/App.css';
 import ScheduleMeeting from '../public/Components/ScheduleMeeting.jsx';
-
+import { UserProvider } from './UserContext.jsx';
+import Forum from "../public/Pages/DiscussionForum/Forum.jsx"
+import InterDepartmentForum from '../public/Pages/DiscussionForum/InterDepartmentForum.jsx';
+import IntraDepartmentForum from '../public/Pages/DiscussionForum/IntraDepartmentForum.jsx';
+import PostDetails from '../public/Pages/DiscussionForum/PostDetail.jsx';
 const App = () => {
   return (
     <>
+    <UserProvider>
       <BrowserRouter>
         <TopBanner />
         <Routes>
@@ -62,12 +67,21 @@ const App = () => {
           <Route path="/MyInventory" element={<MyInventory />} />
           <Route path="/Inc_req" element={<Inc_req />} />
           <Route path="/Out_req" element={<Out_req />} />
-          <Route path="/Discussion" element={<Discussion />} />
+          <Route path ="/Forum" element = {<Forum />} >
+            <Route path ="/Forum/InterDepartment" element = {<InterDepartmentForum />} />
+            <Route path ="/Forum/IntraDepartment" element = {<IntraDepartmentForum />} />
+          </Route>
+          <Route path="/Forum/post/:postId" element={<PostDetails />} />
+          <Route path="/Forum/Discussion" element={<Discussion />} >
+            <Route path = "/Forum/Discussion/:userId" element={<MessagePage />}/>
+          </Route>
           <Route path="/schedulemeeting" element={<ScheduleMeeting/>} />
           <Route path="/ScheduleMeeting" element={<ScheduleMeeting />} />
           <Route path="/Staff" element={<Staff />} />
+
         </Routes>
       </BrowserRouter>
+      </UserProvider>
     </>
   );
 };

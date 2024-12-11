@@ -2,7 +2,7 @@ import React from 'react';
 import gov_logo from '../Images/gov_logo.png';
 import sahakar_logo from '../Images/sahakarlogo.png'; // Import the new logo image
 import { useNavigate, useLocation } from 'react-router-dom';
-
+import GoogleTranslate from './GoogleTranslate';
 const TopBanner = () => {
   const navigate = useNavigate();
   const location = useLocation();
@@ -18,13 +18,23 @@ const TopBanner = () => {
         <div className="ban-logo" style={{ textAlign: 'center' }}>
           <img src={sahakar_logo} alt="Sahakar Logo" width={360} />
         </div>
-        {location.pathname === '/' ? (
-          <button id="empty-but" style={{ backgroundColor: 'white', width: '140px', height: '30px', border: 'none' }}></button>
-        ) : (
-          <button onClick={handleLogOut} id="logout-but" className="bg-red-500 text-white rounded px-4 py-2 hover:bg-red-600 transition">
-            Logout
-          </button>
-        )}
+        <div className="flex items-center gap-4"> 
+          {/* <GoogleTranslate /> */}
+          {location.pathname === '/' ? (
+            <button 
+              id="empty-but" 
+              style={{ backgroundColor: 'white', width: '140px', height: '30px', border: 'none' }}
+            ></button>
+          ) : (
+            <button 
+              onClick={handleLogOut} 
+              id="logout-but" 
+              className="bg-red-500 text-white rounded px-4 py-2 hover:bg-red-600 transition"
+            >
+              Logout
+            </button>
+          )}
+        </div>
       </div>
       <div className="notice-bar bg-black p-1 text-white font-semibold" style={{ overflow: 'hidden', whiteSpace: 'nowrap', height: '50px', display: 'flex', alignItems: 'center' }}>
         <div

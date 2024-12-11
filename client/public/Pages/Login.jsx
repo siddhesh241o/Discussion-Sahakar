@@ -1,16 +1,19 @@
 import React from 'react';
+import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { FaUser, FaLock } from 'react-icons/fa'; // Import icons
 import LoginBack from '../Images/LoginBack.png';
-
+import { useUserContext } from '../../src/UserContext';
 const Login = () => {
+  const [email, setEmail] = useState("");
   const navigate = useNavigate();
-
+  const { user, updateUser }  = useUserContext();
   const handleLogin = (e) => {
     e.preventDefault();
+    updateUser({email});
     navigate('/Dashboard');
   };
-
+  
   return (
     <div className="min-h-screen flex items-start justify-center py-8">
       <div className="w-full max-w-4xl bg-white rounded-lg shadow-lg overflow-hidden flex border-2 border-blue-600">
@@ -34,6 +37,7 @@ const Login = () => {
                 type="email"
                 placeholder="Username"
                 className="w-full p-2 outline-none"
+                onChange={(e) => setEmail(e.target.value)} 
               />
             </div>
             <div className="mb-6 flex items-center border-2 border-gray-300 rounded p-2">
